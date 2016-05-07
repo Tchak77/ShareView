@@ -30,6 +30,7 @@ public class ShapesManager {
         shapes.add(p);
     }
     public boolean isPolyLine(){ return current == Shape.POLYLINE; }
+    public boolean isTexte(){ return current == Shape.TEXTE; }
 
     public void drawShapes(Canvas canvas){
         for(Shape shape: shapes){
@@ -42,21 +43,22 @@ public class ShapesManager {
     }
     public Shape createShape(int x, int y, int width, int height, int color){
         switch(current){
-            case 1:
+            case Shape.ELLIPSE:
                 return new Ellipse(x,y,width,height,color);
 
-            case 2:
+            case Shape.RECTANGLE:
                 return new Rectangle(x,y,width,height,color);
 
-            case 3:
+            case Shape.LINE:
                 return new Line(x, y, x+width, y+height, color);
 
-            case 4:
+            case Shape.POLYLINE:
                 return new Line(x, y, x+width, y+height, color);
-
-
         }
         return null;
+    }
+    public Texte createTexte(int x, int y, String texte, int color ){
+        return new Texte(x,y,texte,color);
     }
 
 

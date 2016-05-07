@@ -69,7 +69,11 @@ public class SheetView extends View {
                 return true;
 
             case MotionEvent.ACTION_UP:
-                shapesManager.addShape(shapesManager.createShape((int)upperLeftX, (int)upperLeftY, (int)(event.getX() - upperLeftX), (int)(event.getY() - upperLeftY),  Color.GREEN));
+                if(shapesManager.isTexte()){
+                    shapesManager.addShape(shapesManager.createTexte((int)event.getX(), (int)event.getY(), "toto", Color.BLUE));
+                } else {
+                    shapesManager.addShape(shapesManager.createShape((int)upperLeftX, (int)upperLeftY, (int)(event.getX() - upperLeftX), (int)(event.getY() - upperLeftY),  Color.GREEN));
+                }
                 upperLeftY = -1;
                 upperLeftX = -1;
                 invalidate();
