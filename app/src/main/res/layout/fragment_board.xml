@@ -43,13 +43,57 @@
             android:background="@drawable/polyline"
             android:clickable="true" />
 
-        <ImageButton
+           <ImageButton
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/texte"
             android:background="@drawable/texte"
             android:clickable="true" />
 
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/colors"
+            android:background="@drawable/colors"
+            android:clickable="true" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:id="@+id/palette"
+        android:layout_gravity="right|top">
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:id="@+id/blue"
+                android:background="@drawable/bleu"
+                android:clickable="true"/>
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:id="@+id/rouge"
+            android:background="@drawable/rouge"
+            android:clickable="true"/>
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:id="@+id/vert"
+            android:background="@drawable/vert"
+            android:clickable="true"/>
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:id="@+id/noir"
+            android:background="@drawable/noir"
+            android:clickable="true"/>
 
     </LinearLayout>
 

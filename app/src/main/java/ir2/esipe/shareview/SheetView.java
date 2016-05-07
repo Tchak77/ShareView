@@ -52,7 +52,7 @@ public class SheetView extends View {
                     upperLeftY = event.getY();
                     return true;
                 } else {
-                    shapesManager.addShape(shapesManager.createShape((int)upperLeftX, (int)upperLeftY, (int)(event.getX() - upperLeftX), (int)(event.getY() - upperLeftY),  Color.GREEN));
+                    shapesManager.addShape(shapesManager.createShape((int)upperLeftX, (int)upperLeftY, (int)(event.getX() - upperLeftX), (int)(event.getY() - upperLeftY)));
                     Log.v("toto", "Avant: X="+upperLeftX+" Y="+upperLeftY+" Now: X="+event.getX()+" Y="+event.getY());
                     upperLeftX = event.getX();
                     upperLeftY = event.getY();
@@ -70,9 +70,9 @@ public class SheetView extends View {
 
             case MotionEvent.ACTION_UP:
                 if(shapesManager.isTexte()){
-                    shapesManager.addShape(shapesManager.createTexte((int)event.getX(), (int)event.getY(), "toto", Color.BLUE));
+                    shapesManager.addShape(shapesManager.createTexte((int)event.getX(), (int)event.getY(), "toto"));
                 } else {
-                    shapesManager.addShape(shapesManager.createShape((int)upperLeftX, (int)upperLeftY, (int)(event.getX() - upperLeftX), (int)(event.getY() - upperLeftY),  Color.GREEN));
+                    shapesManager.addShape(shapesManager.createShape((int)upperLeftX, (int)upperLeftY, (int)(event.getX() - upperLeftX), (int)(event.getY() - upperLeftY)));
                 }
                 upperLeftY = -1;
                 upperLeftX = -1;

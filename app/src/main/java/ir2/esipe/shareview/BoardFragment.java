@@ -1,12 +1,15 @@
 package ir2.esipe.shareview;
 
-import android.support.v4.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import shapes.Shape;
 import shapes.ShapesManager;
@@ -29,12 +32,17 @@ public class BoardFragment extends Fragment {
         final ImageButton lineBtn = (ImageButton) rootView.findViewById(R.id.linebtn);
         final ImageButton polylineBtn = (ImageButton) rootView.findViewById(R.id.polyline);
         final ImageButton texteBtn = (ImageButton) rootView.findViewById(R.id.texte);
-
+        final ImageButton colorBtn = (ImageButton) rootView.findViewById(R.id.colors);
+        final LinearLayout palette = (LinearLayout) rootView.findViewById(R.id.palette);
+        final ImageButton bleu = (ImageButton) rootView.findViewById(R.id.blue);
+        final ImageButton rouge = (ImageButton) rootView.findViewById(R.id.rouge);
+        final ImageButton vert = (ImageButton) rootView.findViewById(R.id.vert);
+        final ImageButton noir = (ImageButton) rootView.findViewById(R.id.noir);
 
         final ShapesManager shapesManager = ShapesManager.getSingleton();
 
 
-        if (ellipseButton != null && rectBtn != null && lineBtn != null) {
+        if (ellipseButton != null && rectBtn != null && lineBtn != null && colorBtn != null) {
 
             ellipseButton.setOnClickListener(new View.OnClickListener() {
 
@@ -79,6 +87,53 @@ public class BoardFragment extends Fragment {
                     clearToolbar(ellipseButton,rectBtn, lineBtn, polylineBtn, texteBtn);
                     shapesManager.setCurrentShape(Shape.TEXTE);
                     v.setBackground(getActivity().getDrawable(R.drawable.texteused));
+                }
+            });
+
+
+            colorBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.v("toto","l:ololo");
+                    palette.getLayoutParams().height = 400;
+                    palette.requestLayout();
+                }
+            });
+
+            bleu.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    shapesManager.setColor(Color.BLUE);
+                    palette.getLayoutParams().height = 0;
+                    palette.requestLayout();
+                    return true;
+                }
+            });
+            rouge.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    shapesManager.setColor(Color.RED);
+                    palette.getLayoutParams().height = 0;
+                    palette.requestLayout();
+                    return true;
+                }
+            });
+            vert.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    shapesManager.setColor(Color.GREEN);
+                    palette.getLayoutParams().height = 0;
+                    palette.requestLayout();
+                    return true;
+                }
+            });
+            noir.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    shapesManager.setColor(Color.BLACK);
+                    palette.getLayoutParams().height = 0;
+                    palette.requestLayout();
+                    return true;
                 }
             });
 

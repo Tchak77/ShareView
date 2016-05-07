@@ -1,6 +1,7 @@
 package shapes;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 
 import java.util.ArrayList;
 
@@ -12,6 +13,7 @@ public class ShapesManager {
     private static ShapesManager manager;
     private ArrayList<Shape> shapes;
     private int current;
+    private int color = Color.BLACK;
 
     private ShapesManager(){
 
@@ -41,7 +43,7 @@ public class ShapesManager {
     public void setCurrentShape(int current){
         this.current = current;
     }
-    public Shape createShape(int x, int y, int width, int height, int color){
+    public Shape createShape(int x, int y, int width, int height){
         switch(current){
             case Shape.ELLIPSE:
                 return new Ellipse(x,y,width,height,color);
@@ -57,8 +59,12 @@ public class ShapesManager {
         }
         return null;
     }
-    public Texte createTexte(int x, int y, String texte, int color ){
+    public Texte createTexte(int x, int y, String texte ){
         return new Texte(x,y,texte,color);
+    }
+
+    public void setColor(int color){
+        this.color = color;
     }
 
 
