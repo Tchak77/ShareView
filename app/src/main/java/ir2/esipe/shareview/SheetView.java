@@ -1,5 +1,6 @@
 package ir2.esipe.shareview;
 
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,7 +11,6 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 
 import shapes.ShapesManager;
-
 
 public class SheetView extends View {
 

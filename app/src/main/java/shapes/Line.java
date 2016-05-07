@@ -6,7 +6,7 @@ import android.graphics.Paint;
 /**
  * Created by Kevin on 07/05/2016.
  */
-public class Line implements Shape{
+public class Line implements Shape {
 
 
     private int Xstart;

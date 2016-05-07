@@ -8,7 +8,7 @@ import android.graphics.RectF;
 /**
  * Created by Kevin on 05/05/2016.
  */
-public class Rectangle implements Shape{
+public class Rectangle implements Shape {
 
     private int X;
     private int Y;
