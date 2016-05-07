@@ -3,21 +3,24 @@ package ir2.esipe.shareview;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 
-import shapes.Ellipse;
 import shapes.ShapesManager;
 
 
 public class SheetView extends View {
 
+    private ShapesManager shapesManager = ShapesManager.getSingleton();
+    private ScaleGestureDetector mScaleDetector = new ScaleGestureDetector(getContext(), new ScaleListener());;
+    private float scale = 1;
+
     public SheetView(Context context) {
         super(context);
+
     }
 
     public SheetView(Context context, AttributeSet attrs) {
@@ -28,17 +31,9 @@ public class SheetView extends View {
         super(context, attrs, defStyleAttr);
     }
 
-    public SheetView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
-
-    private ShapesManager shapesManager = new ShapesManager();
-    private ScaleGestureDetector mScaleDetector = new ScaleGestureDetector(getContext(), new ScaleListener());
-    private float oldDist = 1;
-    private float newDist = 1;
-    private float scale = 1;
 
     public boolean onTouchEvent(MotionEvent event){
+
         int action = event.getActionIndex();
         mScaleDetector.onTouchEvent(event);
         //Indique le nombre de doigts sur l'écran
@@ -48,7 +43,7 @@ public class SheetView extends View {
 
         switch (action){
             case MotionEvent.ACTION_DOWN:
-                shapesManager.addEllipse(new Ellipse((int)event.getX(), (int)event.getY()));
+                shapesManager.addShape(shapesManager.createShape((int) event.getX(), (int) event.getY(),200,100, Color.GREEN));
                 invalidate();
                 break;
         }
@@ -59,14 +54,10 @@ public class SheetView extends View {
         super.onDraw(canvas);
         canvas.save();
         canvas.scale(scale,scale);
-        Paint paint = new Paint();
-        paint.setColor(Color.BLUE);
-        shapesManager.drawEllipses(canvas);
-
-        paint.setColor(Color.GREEN);
-        shapesManager.drawRectangles(canvas);
+        shapesManager.drawShapes(canvas);
         canvas.restore();
     }
+
 
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
         @Override

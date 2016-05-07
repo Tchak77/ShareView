@@ -8,7 +8,7 @@ import android.graphics.RectF;
 /**
  * Created by Kevin on 05/05/2016.
  */
-public class Ellipse {
+public class Ellipse implements Shape {
 
     private int X;
     private int Y;
@@ -33,7 +33,7 @@ public class Ellipse {
     }
 
 
-    public void drawEllipse(Canvas canvas){
+    public void draw(Canvas canvas){
         Paint p = new Paint();
         p.setColor(color);
         canvas.drawOval(new RectF(X , Y  , X + width, Y + height), p);

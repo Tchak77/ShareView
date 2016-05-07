@@ -9,35 +9,49 @@ import java.util.ArrayList;
  */
 public class ShapesManager {
 
-    private ArrayList<Ellipse> ellipses;
-    private ArrayList<Rectangle> rectangles;
+    private static ShapesManager manager;
+    private ArrayList<Shape> shapes;
+    private int current;
 
+    private ShapesManager(){
 
-    public ShapesManager(){
-        ellipses = new ArrayList<>();
-        rectangles = new ArrayList<>();
+        shapes = new ArrayList<>();
+        current =1;
     }
 
-
-    public void addEllipse(Ellipse p){
-        ellipses.add(p);
+    public static ShapesManager getSingleton(){
+        if(manager == null){
+            manager = new ShapesManager();
+        }
+        return manager;
     }
 
-    public void addRectangle(Rectangle rec){
-        rectangles.add(rec);
+    public void addShape(Shape p){
+        shapes.add(p);
     }
 
-    public void drawEllipses(Canvas canvas){
-        for(Ellipse ellipse: ellipses){
-            ellipse.drawEllipse(canvas);
+    public void drawShapes(Canvas canvas){
+        for(Shape shape: shapes){
+            shape.draw(canvas);
         }
     }
 
-    public void drawRectangles(Canvas canvas){
-        for(Rectangle rectangle: rectangles){
-            rectangle.drawRectangle(canvas);
-        }
+    public void setCurrentShape(int current){
+        this.current = current;
     }
+    public Shape createShape(int x, int y, int width, int height, int color){
+        switch(current){
+            case 1:
+                return new Ellipse(x,y,width,height,color);
+
+            case 2:
+                return new Rectangle(x,y,width,height,color);
+
+
+        }
+        return null;
+    }
+
 
 
 
