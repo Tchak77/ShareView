@@ -15,7 +15,11 @@ import shapes.ShapesManager;
 public class SheetView extends View {
 
     private ShapesManager shapesManager = ShapesManager.getSingleton();
-    private ScaleGestureDetector mScaleDetector = new ScaleGestureDetector(getContext(), new ScaleListener());;
+    private ScaleGestureDetector mScaleDetector = new ScaleGestureDetector(getContext(), new ScaleListener());
+
+    private float upperLeftX = 0;
+    private float upperLeftY = 0;
+
     private float scale = 1;
 
     public SheetView(Context context) {
@@ -34,7 +38,7 @@ public class SheetView extends View {
 
     public boolean onTouchEvent(MotionEvent event){
 
-        int action = event.getActionIndex();
+        int action = event.getAction();
         mScaleDetector.onTouchEvent(event);
         //Indique le nombre de doigts sur l'écran
         int nbTouch = event.getPointerCount();
@@ -43,12 +47,24 @@ public class SheetView extends View {
 
         switch (action){
             case MotionEvent.ACTION_DOWN:
-                shapesManager.addShape(shapesManager.createShape((int) event.getX(), (int) event.getY(),200,100, Color.GREEN));
+                upperLeftX = event.getX();
+                upperLeftY = event.getY();
+                return true;
+
+            case MotionEvent.ACTION_UP:
+                shapesManager.addShape(shapesManager.createShape((int)upperLeftX, (int)upperLeftY, (int)(event.getX() - upperLeftX), (int)(event.getY() - upperLeftY),  Color.GREEN));
                 invalidate();
-                break;
+                return true;
+            default:
+                return true;
         }
-        return true;
+
     }
+
+
+
+
+
 
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);

@@ -16,7 +16,7 @@ public class Ellipse implements Shape {
     private int width;
     private int color;
 
-    public Ellipse(int X, int Y, int height, int width, int color){
+    public Ellipse(int X, int Y, int width, int height, int color){
         this.X = X;
         this.Y = Y;
         this.height = height;
