@@ -2,9 +2,13 @@ package ir2.esipe.shareview;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +27,15 @@ public class BoardFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         final View rootView = inflater.inflate(R.layout.fragment_board, container, false);
 
         final ImageButton ellipseButton = (ImageButton) rootView.findViewById(R.id.elipsebtn);
@@ -144,6 +155,19 @@ public class BoardFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_board, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.reset){
+            ShapesManager.getSingleton().resetBoard();
+            getActivity().findViewById(R.id.sheetView).invalidate();
+        }
+        return true;
+    }
 
     private void clearToolbar(ImageButton ellipse, ImageButton rectangle, ImageButton line, ImageButton polyline, ImageButton texte){
         ellipse.setBackground(getActivity().getDrawable(R.drawable.ellipse));
@@ -152,4 +176,6 @@ public class BoardFragment extends Fragment {
         polyline.setBackground(getActivity().getDrawable(R.drawable.polyline));
         texte.setBackground(getActivity().getDrawable(R.drawable.texte));
     }
+
+
 }

@@ -67,6 +67,10 @@ public class ShapesManager {
         this.color = color;
     }
 
+    public void resetBoard(){
+        shapes = new ArrayList<>();
+    }
+
 
 
 
