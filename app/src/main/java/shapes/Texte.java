@@ -24,6 +24,7 @@ public class Texte implements Shape{
     @Override
     public void draw(Canvas canvas) {
         Paint p = new Paint();
+        p.setStrokeWidth(50);
         p.setColor(color);
         canvas.drawText(text, x, y, p);
     }
