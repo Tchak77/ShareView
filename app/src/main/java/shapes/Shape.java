@@ -7,8 +7,11 @@ import android.graphics.Canvas;
  */
 public interface Shape {
 
-    public static int ELLIPSE = 1;
-    public static int RECTANGLE = 2;
+    int ELLIPSE = 1;
+    int RECTANGLE = 2;
+    int LINE = 3;
+    int POLYLINE = 4;
+    int TEXTE = 5;
 
 
     void draw(Canvas canvas);

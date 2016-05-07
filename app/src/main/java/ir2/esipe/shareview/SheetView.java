@@ -17,8 +17,8 @@ public class SheetView extends View {
     private ShapesManager shapesManager = ShapesManager.getSingleton();
     private ScaleGestureDetector mScaleDetector = new ScaleGestureDetector(getContext(), new ScaleListener());
 
-    private float upperLeftX = 0;
-    private float upperLeftY = 0;
+    private float upperLeftX = -1;
+    private float upperLeftY = -1;
 
     private float scale = 1;
 
@@ -44,7 +44,24 @@ public class SheetView extends View {
         int nbTouch = event.getPointerCount();
         Log.v(SheetView.class.getSimpleName(), "Touch:"+nbTouch);
 
+        if(shapesManager.isPolyLine()){
+            if(action == MotionEvent.ACTION_DOWN){
+                if(upperLeftY == -1){
 
+                    upperLeftX = event.getX();
+                    upperLeftY = event.getY();
+                    return true;
+                } else {
+                    shapesManager.addShape(shapesManager.createShape((int)upperLeftX, (int)upperLeftY, (int)(event.getX() - upperLeftX), (int)(event.getY() - upperLeftY),  Color.GREEN));
+                    Log.v("toto", "Avant: X="+upperLeftX+" Y="+upperLeftY+" Now: X="+event.getX()+" Y="+event.getY());
+                    upperLeftX = event.getX();
+                    upperLeftY = event.getY();
+                    invalidate();
+                    return true;
+                }
+            }
+            return true;
+        }
         switch (action){
             case MotionEvent.ACTION_DOWN:
                 upperLeftX = event.getX();
@@ -53,6 +70,8 @@ public class SheetView extends View {
 
             case MotionEvent.ACTION_UP:
                 shapesManager.addShape(shapesManager.createShape((int)upperLeftX, (int)upperLeftY, (int)(event.getX() - upperLeftX), (int)(event.getY() - upperLeftY),  Color.GREEN));
+                upperLeftY = -1;
+                upperLeftX = -1;
                 invalidate();
                 return true;
             default:
@@ -60,11 +79,6 @@ public class SheetView extends View {
         }
 
     }
-
-
-
-
-
 
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);

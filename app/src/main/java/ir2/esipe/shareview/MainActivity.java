@@ -18,16 +18,21 @@ public class MainActivity extends AppCompatActivity {
 
         final ImageButton ellipseButton = (ImageButton) findViewById(R.id.elipsebtn);
         final ImageButton rectBtn = (ImageButton) findViewById(R.id.recbtn);
+        final ImageButton lineBtn = (ImageButton) findViewById(R.id.linebtn);
+        final ImageButton polylineBtn = (ImageButton) findViewById(R.id.polyline);
+        final ImageButton texteBtn = (ImageButton) findViewById(R.id.texte);
+
+
         final ShapesManager shapesManager = ShapesManager.getSingleton();
 
 
-        if (ellipseButton != null && rectBtn != null) {
+        if (ellipseButton != null && rectBtn != null && lineBtn != null) {
 
             ellipseButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
-                    clearToolbar(ellipseButton,rectBtn);
+                    clearToolbar(ellipseButton,rectBtn, lineBtn, polylineBtn, texteBtn);
                     shapesManager.setCurrentShape(Shape.ELLIPSE);
                     v.setBackground(getDrawable(R.drawable.ellipseused));
                 }
@@ -36,9 +41,36 @@ public class MainActivity extends AppCompatActivity {
             rectBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    clearToolbar(ellipseButton,rectBtn);
+                    clearToolbar(ellipseButton,rectBtn, lineBtn, polylineBtn, texteBtn);
                     shapesManager.setCurrentShape(Shape.RECTANGLE);
                     v.setBackground(getDrawable(R.drawable.rectangleused));
+                }
+            });
+
+            lineBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clearToolbar(ellipseButton,rectBtn, lineBtn, polylineBtn, texteBtn);
+                    shapesManager.setCurrentShape(Shape.LINE);
+                    v.setBackground(getDrawable(R.drawable.lineused));
+                }
+            });
+
+            polylineBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clearToolbar(ellipseButton,rectBtn, lineBtn, polylineBtn, texteBtn);
+                    shapesManager.setCurrentShape(Shape.POLYLINE);
+                    v.setBackground(getDrawable(R.drawable.polylineused));
+                }
+            });
+
+            texteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clearToolbar(ellipseButton,rectBtn, lineBtn, polylineBtn, texteBtn);
+                    shapesManager.setCurrentShape(Shape.TEXTE);
+                    v.setBackground(getDrawable(R.drawable.texteused));
                 }
             });
 
@@ -49,8 +81,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void clearToolbar(ImageButton ellipse, ImageButton rectangle){
+    private void clearToolbar(ImageButton ellipse, ImageButton rectangle, ImageButton line, ImageButton polyline, ImageButton texte){
         ellipse.setBackground(getDrawable(R.drawable.ellipse));
         rectangle.setBackground(getDrawable(R.drawable.rectangle));
+        line.setBackground(getDrawable(R.drawable.line));
+        polyline.setBackground(getDrawable(R.drawable.polyline));
+        texte.setBackground(getDrawable(R.drawable.texte));
     }
 }

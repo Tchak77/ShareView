@@ -29,6 +29,7 @@ public class ShapesManager {
     public void addShape(Shape p){
         shapes.add(p);
     }
+    public boolean isPolyLine(){ return current == Shape.POLYLINE; }
 
     public void drawShapes(Canvas canvas){
         for(Shape shape: shapes){
@@ -46,6 +47,12 @@ public class ShapesManager {
 
             case 2:
                 return new Rectangle(x,y,width,height,color);
+
+            case 3:
+                return new Line(x, y, x+width, y+height, color);
+
+            case 4:
+                return new Line(x, y, x+width, y+height, color);
 
 
         }

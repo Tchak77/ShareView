@@ -28,6 +28,29 @@
             android:id="@+id/recbtn"
             android:background="@drawable/rectangle"
             android:clickable="true" />
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/linebtn"
+            android:background="@drawable/line"
+            android:clickable="true" />
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/polyline"
+            android:background="@drawable/polyline"
+            android:clickable="true" />
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/texte"
+            android:background="@drawable/texte"
+            android:clickable="true" />
+
+
     </LinearLayout>
 
 
