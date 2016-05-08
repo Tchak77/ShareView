@@ -40,4 +40,12 @@ public class Rectangle implements Shape {
         p.setColor(color);
         canvas.drawRect(new RectF(X , Y, X+width, Y+height), p);
     }
+
+    @Override
+    public String toJSON() {
+        String str = "";
+
+        str += "{\"draw\": { \"shape\": \"rectangle\", \"left\":"+X+", \"top\":"+Y+",\"right\":"+(X+width)+",\"bottom\":"+(Y+height)+"} }";
+        return str;
+    }
 }

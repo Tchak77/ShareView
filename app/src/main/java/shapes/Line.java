@@ -32,4 +32,12 @@ public class Line implements Shape {
         p.setStrokeWidth(50);
         canvas.drawLine(Xstart, Ystart, Xend, Yend, p);
     }
+
+    @Override
+    public String toJSON() {
+        String str = "";
+
+        str += "{\"draw\": { \"shape\": \"polyline\", \"coordinates\":[["+Xstart+","+Ystart+"],["+Xend+","+Yend+"]] } }";
+        return str;
+    }
 }

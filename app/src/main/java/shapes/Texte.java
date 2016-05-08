@@ -28,4 +28,12 @@ public class Texte implements Shape{
         p.setColor(color);
         canvas.drawText(text, x, y, p);
     }
+
+    @Override
+    public String toJSON() {
+        String str = "";
+
+        str += "{\"draw\": { \"shape\": \"text\", \"position\":["+x+","+y+"], \"content\": \""+text+"\" } }";
+        return str;
+    }
 }

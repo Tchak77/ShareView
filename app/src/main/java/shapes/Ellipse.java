@@ -39,6 +39,13 @@ public class Ellipse implements Shape {
         canvas.drawOval(new RectF(X , Y  , X + width, Y + height), p);
     }
 
+    @Override
+    public String toJSON() {
+        String str = "";
+
+        str += "{\"draw\": { \"shape\": \"ellipse\", \"center\":["+X+","+Y+"], \"radius\": ["+width+","+height+"] } }";
+        return str;
+    }
 
 
 }

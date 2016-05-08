@@ -2,8 +2,10 @@ package shapes;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Kevin on 05/05/2016.
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 public class ShapesManager {
 
     private static ShapesManager manager;
-    private ArrayList<Shape> shapes;
+    private List<Shape> shapes;
     private int current;
     private int color = Color.BLACK;
 
@@ -43,7 +45,8 @@ public class ShapesManager {
     public void setCurrentShape(int current){
         this.current = current;
     }
-    public Shape createShape(int x, int y, int width, int height){
+
+    public Shape createShape(int x, int y, @Nullable int width, @Nullable int height){
         switch(current){
             case Shape.ELLIPSE:
                 return new Ellipse(x,y,width,height,color);
@@ -55,7 +58,7 @@ public class ShapesManager {
                 return new Line(x, y, x+width, y+height, color);
 
             case Shape.POLYLINE:
-                return new Line(x, y, x+width, y+height, color);
+                return new Polyline(x, y, color);
         }
         return null;
     }
@@ -69,6 +72,19 @@ public class ShapesManager {
 
     public void resetBoard(){
         shapes = new ArrayList<>();
+    }
+
+
+    public void setBoard(List<Shape> shapes){
+        this.shapes = shapes;
+    }
+
+    public String toJSON(){
+        StringBuilder strb = new StringBuilder();
+        for(Shape shape: shapes){
+            strb.append(shape.toJSON());
+        }
+        return strb.toString();
     }
 
 

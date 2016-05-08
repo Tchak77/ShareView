@@ -15,5 +15,6 @@ public interface Shape {
 
 
     void draw(Canvas canvas);
+    String toJSON();
 
 }

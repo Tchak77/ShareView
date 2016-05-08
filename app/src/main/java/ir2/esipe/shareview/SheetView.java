@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 
+import shapes.Polyline;
 import shapes.ShapesManager;
 
 public class SheetView extends View {
@@ -44,17 +45,19 @@ public class SheetView extends View {
         Log.v(SheetView.class.getSimpleName(), "Touch:"+nbTouch);
 
         if(shapesManager.isPolyLine()){
+            Polyline pl = null;
             if(action == MotionEvent.ACTION_DOWN){
                 if(upperLeftY == -1){
 
                     upperLeftX = event.getX();
                     upperLeftY = event.getY();
+                    pl =(Polyline)shapesManager.createShape((int)upperLeftX, (int)upperLeftY, 0, 0);
                     return true;
                 } else {
                     shapesManager.addShape(shapesManager.createShape((int)upperLeftX, (int)upperLeftY, (int)(event.getX() - upperLeftX), (int)(event.getY() - upperLeftY)));
-                    Log.v("toto", "Avant: X="+upperLeftX+" Y="+upperLeftY+" Now: X="+event.getX()+" Y="+event.getY());
                     upperLeftX = event.getX();
                     upperLeftY = event.getY();
+                    pl.addPoint((int)upperLeftX, (int)upperLeftY);
                     invalidate();
                     return true;
                 }
