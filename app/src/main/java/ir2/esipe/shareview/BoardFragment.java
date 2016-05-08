@@ -23,6 +23,7 @@ import shapes.ShapesManager;
  */
 public class BoardFragment extends Fragment {
 
+    private String title;
     public BoardFragment() {
     }
 
@@ -30,6 +31,8 @@ public class BoardFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        title = getActivity().getIntent().getStringExtra("title");
+
     }
 
     @Override

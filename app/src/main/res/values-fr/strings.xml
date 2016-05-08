@@ -2,4 +2,7 @@
 <resources>
     <string name="action_settings">Options</string>
     <string name="resetBoard">Réinitialiser le tableau</string>
+    <string name="joinBoard">Rejoindre un tableau existant</string>
+    <string name="newBoard">Créer nouveau Tableau</string>
+    <string name="title">Titre</string>
 </resources>
