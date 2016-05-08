@@ -83,7 +83,7 @@ public class ShapesManager {
         this.shapes = shapes;
     }
 
-    public String toJSON(){
+    public String JSON(){
         StringBuilder strb = new StringBuilder();
         for(Shape shape: shapes){
             strb.append(shape.toJSON());

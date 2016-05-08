@@ -52,6 +52,7 @@ public class BoardFragment extends Fragment {
         final ImageButton rouge = (ImageButton) rootView.findViewById(R.id.rouge);
         final ImageButton vert = (ImageButton) rootView.findViewById(R.id.vert);
         final ImageButton noir = (ImageButton) rootView.findViewById(R.id.noir);
+        final ImageButton move = (ImageButton) rootView.findViewById(R.id.movebtn);
 
         final ShapesManager shapesManager = ShapesManager.getSingleton();
 
@@ -149,6 +150,35 @@ public class BoardFragment extends Fragment {
                     return true;
                 }
             });
+
+            move.setOnTouchListener(new View.OnTouchListener() {
+
+                float dX, dY;
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    View view = getActivity().findViewById(R.id.toolbar);
+
+                    switch (event.getAction()) {
+
+                        case MotionEvent.ACTION_DOWN:
+
+                            dX = view.getX() - event.getRawX();
+                            dY = view.getY() - event.getRawY();
+                            break;
+
+                        case MotionEvent.ACTION_MOVE:
+
+                            view.animate()
+                                    .x(event.getRawX() + dX)
+                                    .y(event.getRawY() + dY)
+                                    .setDuration(0)
+                                    .start();
+                            break;
+                        default:
+                            return false;
+                    }
+                    return true;
+            }});
 
         } else {
             Log.e(MainActivity.class.getSimpleName(),"Error using toolbar listener");

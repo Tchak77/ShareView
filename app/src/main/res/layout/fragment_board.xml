@@ -18,6 +18,12 @@
         <ImageButton
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:id="@+id/movebtn"
+            android:background="@drawable/move"
+            android:clickable="true" />
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:id="@+id/elipsebtn"
             android:background="@drawable/ellipseused"
             android:clickable="true" />

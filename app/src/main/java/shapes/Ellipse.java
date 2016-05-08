@@ -3,7 +3,6 @@ package shapes;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.util.Log;
 
 /**
  * Created by Kevin on 05/05/2016.
@@ -18,7 +17,6 @@ public class Ellipse implements Shape {
 
     public Ellipse(int X, int Y, int width, int height, int color){
 
-        Log.v("toto","X="+X+" Y="+Y+" width="+width+ "height = "+height);
         if(width < 0){
             this.X = X+width;
             this.width = -width;
@@ -34,7 +32,6 @@ public class Ellipse implements Shape {
             this.Y = Y;
             this.height = height;
         }
-        Log.v("toto","X="+this.X+" Y="+this.Y+" width="+this.width+ "height = "+this.height);
         this.color = color;
     }
 
