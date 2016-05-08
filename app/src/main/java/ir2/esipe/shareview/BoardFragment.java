@@ -108,7 +108,6 @@ public class BoardFragment extends Fragment {
             colorBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.v("toto","l:ololo");
                     palette.getLayoutParams().height = 400;
                     palette.requestLayout();
                 }

@@ -9,4 +9,6 @@
     <string name="newBoard">Create New Board</string>
     <string name="joinBoard">Join existing Board</string>
     <string name="credits" translatable="false">©Tchakmakdjian Kévin, Mignon Frédéric, Gerber Xavier, ESIPE</string>
+
+    <string name="text">Text: </string>
 </resources>

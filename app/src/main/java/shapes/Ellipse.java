@@ -1,9 +1,9 @@
 package shapes;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.util.Log;
 
 /**
  * Created by Kevin on 05/05/2016.
@@ -17,20 +17,27 @@ public class Ellipse implements Shape {
     private int color;
 
     public Ellipse(int X, int Y, int width, int height, int color){
-        this.X = X;
-        this.Y = Y;
-        this.height = height;
-        this.width = width;
+
+        Log.v("toto","X="+X+" Y="+Y+" width="+width+ "height = "+height);
+        if(width < 0){
+            this.X = X+width;
+            this.width = -width;
+        }else {
+            this.X = X;
+            this.width = width;
+        }
+
+        if(height < 0){
+            this.Y = Y+height;
+            this.height = -height;
+        } else {
+            this.Y = Y;
+            this.height = height;
+        }
+        Log.v("toto","X="+this.X+" Y="+this.Y+" width="+this.width+ "height = "+this.height);
         this.color = color;
     }
 
-    public Ellipse(int X, int Y){
-        this.X = X;
-        this.Y = Y;
-        this.height = 100;
-        this.width = 200;
-        color = Color.BLUE;
-    }
 
 
     public void draw(Canvas canvas){

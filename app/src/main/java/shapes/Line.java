@@ -17,6 +17,8 @@ public class Line implements Shape {
 
 
     public Line(int xstart, int ystart, int xend, int yend, int color) {
+
+
         Xstart = xstart;
         Ystart = ystart;
         Xend = xend;

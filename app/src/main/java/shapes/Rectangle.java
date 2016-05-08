@@ -1,7 +1,6 @@
 package shapes;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
@@ -18,21 +17,24 @@ public class Rectangle implements Shape {
 
 
     public Rectangle(int x, int y, int width, int height, int color) {
-        X = x;
-        Y = y;
-        this.width = width;
-        this.height = height;
+
+        if(width < 0){
+            X = x+width;
+            this.width = -width;
+        } else {
+            X = x;
+            this.width = width;
+        }
+        if(height < 0){
+            Y = y+height;
+            this.height = -height;
+        } else {
+            Y = y;
+            this.height = height;
+        }
         this.color = color;
     }
 
-
-    public Rectangle(int x, int y) {
-        X = x;
-        Y = y;
-        this.height = 100;
-        this.width = 200;
-        color = Color.GREEN;
-    }
 
 
     public void draw(Canvas canvas){

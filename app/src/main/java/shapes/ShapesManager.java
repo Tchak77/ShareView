@@ -2,7 +2,6 @@ package shapes;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +45,7 @@ public class ShapesManager {
         this.current = current;
     }
 
-    public Shape createShape(int x, int y, @Nullable int width, @Nullable int height){
+    public Shape createShape(int x, int y, int width, int height){
         switch(current){
             case Shape.ELLIPSE:
                 return new Ellipse(x,y,width,height,color);
@@ -62,8 +61,13 @@ public class ShapesManager {
         }
         return null;
     }
+
+    public Shape getLastShape(){
+        return shapes.get(shapes.size()-1);
+    }
     public Texte createTexte(int x, int y, String texte ){
         return new Texte(x,y,texte,color);
+
     }
 
     public void setColor(int color){
