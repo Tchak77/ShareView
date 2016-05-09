@@ -1,12 +1,18 @@
 package ir2.esipe.shareview;
 
+import android.app.FragmentTransaction;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import menu.OptionsFragment;
+
+public class MainActivity extends AppCompatActivity implements OptionsFragment.OnFragmentInteractionListener{
 
     private String title;
     @Override
@@ -18,6 +24,19 @@ public class MainActivity extends AppCompatActivity {
         title = getIntent().getStringExtra("title");
         toolbar.setTitle(title);
         setSupportActionBar(toolbar);
+
+
+        TextView toolbarOption = (TextView)findViewById(R.id.toolbarOption);
+        toolbarOption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                OptionsFragment optFrag = OptionsFragment.newInstance();
+                transaction.replace(R.id.fragment, optFrag);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
 
 
 
@@ -40,4 +59,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }

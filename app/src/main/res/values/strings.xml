@@ -11,4 +11,7 @@
     <string name="credits" translatable="false">©Tchakmakdjian Kévin, Mignon Frédéric, Gerber Xavier, ESIPE</string>
 
     <string name="text">Text: </string>
+    <string name="textSize">Text Size: </string>
+
+    <string name="toolbarOption" translatable="false">OPTIONS</string>
 </resources>

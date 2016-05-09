@@ -6,4 +6,5 @@
     <string name="newBoard">Créer nouveau Tableau</string>
     <string name="title">Titre</string>
     <string name="text">Texte: </string>
+    <string name="textSize">Taille du texte: </string>
 </resources>

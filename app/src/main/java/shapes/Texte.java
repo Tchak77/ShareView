@@ -13,18 +13,20 @@ public class Texte implements Shape{
     private int y;
     private String text;
     private int color;
+    private int size;
 
-    public Texte(int x, int y, String text, int color) {
+    public Texte(int x, int y, String text, int color, int size) {
         this.x = x;
         this.y = y;
         this.text = text;
         this.color = color;
+        this.size = size;
     }
 
     @Override
     public void draw(Canvas canvas) {
         Paint p = new Paint();
-        p.setTextSize(50);
+        p.setTextSize(size);
         p.setColor(color);
         canvas.drawText(text, x, y, p);
     }

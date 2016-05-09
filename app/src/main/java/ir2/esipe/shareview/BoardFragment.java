@@ -197,7 +197,9 @@ public class BoardFragment extends Fragment {
         if(item.getItemId() == R.id.reset){
             ShapesManager.getSingleton().resetBoard();
             getActivity().findViewById(R.id.sheetView).invalidate();
+            return true;
         }
+
         return true;
     }
 
@@ -207,6 +209,8 @@ public class BoardFragment extends Fragment {
         line.setBackground(getActivity().getDrawable(R.drawable.line));
         polyline.setBackground(getActivity().getDrawable(R.drawable.polyline));
         texte.setBackground(getActivity().getDrawable(R.drawable.texte));
+        getActivity().findViewById(R.id.palette).getLayoutParams().height = 0;
+        getActivity().findViewById(R.id.palette).requestLayout();
     }
 
 

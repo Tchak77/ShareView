@@ -15,6 +15,7 @@ public class ShapesManager {
     private List<Shape> shapes;
     private int current;
     private int color = Color.BLACK;
+    private int texteSize = 15;
 
     private ShapesManager(){
 
@@ -66,7 +67,7 @@ public class ShapesManager {
         return shapes.get(shapes.size()-1);
     }
     public Texte createTexte(int x, int y, String texte ){
-        return new Texte(x,y,texte,color);
+        return new Texte(x,y,texte,color, texteSize);
 
     }
 
@@ -91,6 +92,10 @@ public class ShapesManager {
         return strb.toString();
     }
 
+
+    public void setFontSize(int size){
+        texteSize = size;
+    }
 
 
 
