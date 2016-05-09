@@ -156,7 +156,7 @@ public class BoardFragment extends Fragment {
                 float dX, dY;
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    View view = getActivity().findViewById(R.id.toolbar);
+                    View view = getActivity().findViewById(R.id.toolbarDraw);
 
                     switch (event.getAction()) {
 
