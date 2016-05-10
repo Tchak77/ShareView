@@ -12,14 +12,18 @@ import android.view.View;
 import android.widget.TextView;
 
 import fragments.BoardFragment;
+import fragments.ChatFragment;
 import fragments.OptionsFragment;
+import fragments.UsersFragment;
 
-public class MainActivity extends AppCompatActivity implements OptionsFragment.OnFragmentInteractionListener, BoardFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements OptionsFragment.OnFragmentInteractionListener, BoardFragment.OnFragmentInteractionListener, UsersFragment.OnFragmentInteractionListener, ChatFragment.OnFragmentInteractionListener{
 
     private String title;
     private FragmentManager fragmentManager;
     private BoardFragment boardFragment;
     private OptionsFragment optionsFragment;
+    private ChatFragment chatFragment;
+    private UsersFragment usersFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements OptionsFragment.O
 
         boardFragment = new BoardFragment();
         optionsFragment = new OptionsFragment();
+        chatFragment = new ChatFragment();
+        usersFragment = new UsersFragment();
 
         fragmentManager = getFragmentManager();
 
@@ -61,6 +67,29 @@ public class MainActivity extends AppCompatActivity implements OptionsFragment.O
                 transaction.addToBackStack(null);
                 transaction.commit();
 
+            }
+        });
+
+        TextView toolbarChat = (TextView) findViewById(R.id.toolbarChat);
+        toolbarChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragment_container, chatFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+            }
+        });
+
+        TextView toolbarUser = (TextView) findViewById(R.id.toolbarUsers);
+        toolbarUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragment_container, usersFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 
