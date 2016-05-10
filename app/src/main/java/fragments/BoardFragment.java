@@ -1,9 +1,10 @@
-package ir2.esipe.shareview;
+package fragments;
 
-import android.graphics.Color;
+import android.app.Fragment;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,8 +14,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
+import ir2.esipe.shareview.MainActivity;
+import ir2.esipe.shareview.R;
 import shapes.Shape;
 import shapes.ShapesManager;
 
@@ -24,12 +26,15 @@ import shapes.ShapesManager;
 public class BoardFragment extends Fragment {
 
     private String title;
+    private OnFragmentInteractionListener mListener;
+
     public BoardFragment() {
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setHasOptionsMenu(true);
         title = getActivity().getIntent().getStringExtra("title");
 
@@ -38,27 +43,21 @@ public class BoardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         final View rootView = inflater.inflate(R.layout.fragment_board, container, false);
+
 
         final ImageButton ellipseButton = (ImageButton) rootView.findViewById(R.id.elipsebtn);
         final ImageButton rectBtn = (ImageButton)rootView.findViewById(R.id.recbtn);
         final ImageButton lineBtn = (ImageButton) rootView.findViewById(R.id.linebtn);
         final ImageButton polylineBtn = (ImageButton) rootView.findViewById(R.id.polyline);
         final ImageButton texteBtn = (ImageButton) rootView.findViewById(R.id.texte);
-        final ImageButton colorBtn = (ImageButton) rootView.findViewById(R.id.colors);
-        final LinearLayout palette = (LinearLayout) rootView.findViewById(R.id.palette);
-        final ImageButton bleu = (ImageButton) rootView.findViewById(R.id.blue);
-        final ImageButton rouge = (ImageButton) rootView.findViewById(R.id.rouge);
-        final ImageButton vert = (ImageButton) rootView.findViewById(R.id.vert);
-        final ImageButton noir = (ImageButton) rootView.findViewById(R.id.noir);
+
+
         final ImageButton move = (ImageButton) rootView.findViewById(R.id.movebtn);
 
         final ShapesManager shapesManager = ShapesManager.getSingleton();
 
-
-        if (ellipseButton != null && rectBtn != null && lineBtn != null && colorBtn != null) {
-
+        if (ellipseButton != null && rectBtn != null && lineBtn != null) {
             ellipseButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -106,50 +105,6 @@ public class BoardFragment extends Fragment {
             });
 
 
-            colorBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    palette.getLayoutParams().height = 400;
-                    palette.requestLayout();
-                }
-            });
-
-            bleu.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    shapesManager.setColor(Color.BLUE);
-                    palette.getLayoutParams().height = 0;
-                    palette.requestLayout();
-                    return true;
-                }
-            });
-            rouge.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    shapesManager.setColor(Color.RED);
-                    palette.getLayoutParams().height = 0;
-                    palette.requestLayout();
-                    return true;
-                }
-            });
-            vert.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    shapesManager.setColor(Color.GREEN);
-                    palette.getLayoutParams().height = 0;
-                    palette.requestLayout();
-                    return true;
-                }
-            });
-            noir.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    shapesManager.setColor(Color.BLACK);
-                    palette.getLayoutParams().height = 0;
-                    palette.requestLayout();
-                    return true;
-                }
-            });
 
             move.setOnTouchListener(new View.OnTouchListener() {
 
@@ -209,9 +164,27 @@ public class BoardFragment extends Fragment {
         line.setBackground(getActivity().getDrawable(R.drawable.line));
         polyline.setBackground(getActivity().getDrawable(R.drawable.polyline));
         texte.setBackground(getActivity().getDrawable(R.drawable.texte));
-        getActivity().findViewById(R.id.palette).getLayoutParams().height = 0;
-        getActivity().findViewById(R.id.palette).requestLayout();
+
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(Uri uri);
+    }
 }

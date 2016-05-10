@@ -16,6 +16,7 @@ public class ShapesManager {
     private int current;
     private int color = Color.BLACK;
     private int texteSize = 15;
+    private int stokeSize = 15;
 
     private ShapesManager(){
 
@@ -55,7 +56,7 @@ public class ShapesManager {
                 return new Rectangle(x,y,width,height,color);
 
             case Shape.LINE:
-                return new Line(x, y, x+width, y+height, color);
+                return new Line(x, y, x+width, y+height, color, stokeSize);
 
             case Shape.POLYLINE:
                 return new Polyline(x, y, color);
@@ -96,6 +97,8 @@ public class ShapesManager {
     public void setFontSize(int size){
         texteSize = size;
     }
+
+    public void setStokeSize(int size) { stokeSize = size; }
 
 
 

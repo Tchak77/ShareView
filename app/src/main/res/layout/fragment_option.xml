@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="@string/textSize"
         android:id="@+id/textSizetxt"
-        android:layout_gravity="left|top" />
+      />
 
     <SeekBar
         android:layout_width="match_parent"
@@ -20,5 +20,64 @@
         android:id="@+id/txtSizeBar"
         android:max="100"
         android:indeterminate="false" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/strokeSize"
+        android:id="@+id/strokeSize"
+        />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/strokeSizeBar"
+        android:max="100"
+        android:indeterminate="false" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/colortxt"
+        android:text="@string/color"/>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/palette"
+        >
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:id="@+id/blue"
+            android:background="@drawable/bleu"
+            android:clickable="true"/>
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:id="@+id/rouge"
+            android:background="@drawable/rouge"
+            android:clickable="true"/>
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:id="@+id/vert"
+            android:background="@drawable/vert"
+            android:clickable="true"/>
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:id="@+id/noir"
+            android:background="@drawable/noir"
+            android:clickable="true"/>
+
+    </LinearLayout>
 
 </LinearLayout>

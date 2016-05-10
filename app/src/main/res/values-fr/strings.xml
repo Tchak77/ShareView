@@ -7,4 +7,6 @@
     <string name="title">Titre</string>
     <string name="text">Texte: </string>
     <string name="textSize">Taille du texte: </string>
+    <string name="strokeSize">Epaisseur:</string>
+    <string name="color">Couleur:</string>
 </resources>

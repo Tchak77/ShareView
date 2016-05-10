@@ -1,5 +1,6 @@
 package ir2.esipe.shareview;
 
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,15 +11,29 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import menu.OptionsFragment;
+import fragments.BoardFragment;
+import fragments.OptionsFragment;
 
-public class MainActivity extends AppCompatActivity implements OptionsFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements OptionsFragment.OnFragmentInteractionListener, BoardFragment.OnFragmentInteractionListener{
 
     private String title;
+    private FragmentManager fragmentManager;
+    private BoardFragment boardFragment;
+    private OptionsFragment optionsFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        boardFragment = new BoardFragment();
+        optionsFragment = new OptionsFragment();
+
+        fragmentManager = getFragmentManager();
+
+
+        fragmentManager.beginTransaction()
+                .add(R.id.fragment_container, new BoardFragment())
+                .commit();
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         title = getIntent().getStringExtra("title");
@@ -30,11 +45,22 @@ public class MainActivity extends AppCompatActivity implements OptionsFragment.O
         toolbarOption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                OptionsFragment optFrag = OptionsFragment.newInstance();
-                transaction.replace(R.id.fragment, optFrag);
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragment_container, optionsFragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
+            }
+        });
+
+        TextView toolbarBoard = (TextView) findViewById(R.id.toolbarBoard);
+        toolbarBoard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragment_container, boardFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
             }
         });
 

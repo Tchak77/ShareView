@@ -6,12 +6,19 @@
 
     <string name="title">Title</string>
 
+    <!-- Home strings -->
     <string name="newBoard">Create New Board</string>
     <string name="joinBoard">Join existing Board</string>
     <string name="credits" translatable="false">©Tchakmakdjian Kévin, Mignon Frédéric, Gerber Xavier, ESIPE</string>
 
+    <!-- Option strings -->
     <string name="text">Text: </string>
     <string name="textSize">Text Size: </string>
+    <string name="strokeSize">Stroke Size: </string>
+    <string name="color">Color:</string>
 
+
+    <!--Option toolbar-->
     <string name="toolbarOption" translatable="false">OPTIONS</string>
+    <string name="toolbarBoard" translatable="false">BOARD</string>
 </resources>

@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
     tools:context="ir2.esipe.shareview.MainActivity">
 
@@ -23,22 +30,38 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarFragments"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
-        app:popupTheme="@style/AppTheme.PopupOverlay" >
-
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        android:paddingBottom="31dp">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbarBoard"
+            android:text="@string/toolbarBoard"
+            android:paddingRight="50dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/toolbarOption"
-            android:text="@string/toolbarOption"/>
+            android:text="@string/toolbarOption"
+            android:paddingRight="50dp"/>
 
         </android.support.v7.widget.Toolbar>
 
 
     </android.support.design.widget.AppBarLayout>
 
-        <include layout="@layout/content_main"/>
+
 
 </android.support.design.widget.CoordinatorLayout>
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/fragment_container"
+        />
+    </LinearLayout>
