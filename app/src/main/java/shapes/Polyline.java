@@ -34,7 +34,15 @@ public class Polyline implements Shape {
         for(int i=0; i<points.size()-1; i++){
             canvas.drawLine(points.get(i).getX(), points.get(i).getY(), points.get(i+1).getX(), points.get(i+1).getY(), p);
         }
+    }
 
+
+    public void setColor(int color){
+        this.color = color;
+    }
+
+    public Point getPoint(){
+        return points.get(points.size()-1);
     }
 
     @Override

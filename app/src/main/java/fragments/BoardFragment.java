@@ -46,6 +46,7 @@ public class BoardFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_board, container, false);
 
 
+
         final ImageButton ellipseButton = (ImageButton) rootView.findViewById(R.id.elipsebtn);
         final ImageButton rectBtn = (ImageButton)rootView.findViewById(R.id.recbtn);
         final ImageButton lineBtn = (ImageButton) rootView.findViewById(R.id.linebtn);
@@ -56,6 +57,20 @@ public class BoardFragment extends Fragment {
         final ImageButton move = (ImageButton) rootView.findViewById(R.id.movebtn);
 
         final ShapesManager shapesManager = ShapesManager.getSingleton();
+
+
+
+        if(shapesManager.isPolyLine()){
+            polylineBtn.setBackground(getActivity().getDrawable(R.drawable.polylineused));
+        } else if(shapesManager.isTexte()){
+            texteBtn.setBackground(getActivity().getDrawable(R.drawable.texteused));
+        } else if(shapesManager.isEllipse()){
+            ellipseButton.setBackground(getActivity().getDrawable(R.drawable.ellipseused));
+        } else if(shapesManager.isRectangle()){
+            rectBtn.setBackground(getActivity().getDrawable(R.drawable.rectangleused));
+        } else {
+            lineBtn.setBackground(getActivity().getDrawable(R.drawable.lineused));
+        }
 
         if (ellipseButton != null && rectBtn != null && lineBtn != null) {
             ellipseButton.setOnClickListener(new View.OnClickListener() {

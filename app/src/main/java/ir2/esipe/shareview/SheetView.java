@@ -40,7 +40,12 @@ public class SheetView extends View {
 
         if(shapesManager.isPolyLine()){
             if(action == MotionEvent.ACTION_DOWN){
-                if(upperLeftY == -1){
+
+                if(shapesManager.getLastShape() != null && shapesManager.getLastShape() instanceof Polyline && ((Polyline) shapesManager.getLastShape()).getPoint() != null ){
+                    upperLeftX = ((Polyline) shapesManager.getLastShape()).getPoint().getX();
+                    upperLeftY = ((Polyline) shapesManager.getLastShape()).getPoint().getY();
+                }
+                if(upperLeftX == -1){
 
                     upperLeftX = event.getX();
                     upperLeftY = event.getY();

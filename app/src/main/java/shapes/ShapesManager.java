@@ -18,6 +18,7 @@ public class ShapesManager {
     private int texteSize = 15;
     private int stokeSize = 15;
 
+
     private ShapesManager(){
 
         shapes = new ArrayList<>();
@@ -36,6 +37,9 @@ public class ShapesManager {
     }
     public boolean isPolyLine(){ return current == Shape.POLYLINE; }
     public boolean isTexte(){ return current == Shape.TEXTE; }
+    public boolean isRectangle(){ return current == Shape.RECTANGLE; }
+    public boolean isEllipse(){ return current == Shape.ELLIPSE; }
+    public boolean isLine(){ return current == Shape.LINE; }
 
     public void drawShapes(Canvas canvas){
         for(Shape shape: shapes){
@@ -64,8 +68,11 @@ public class ShapesManager {
         return null;
     }
 
-    public Shape getLastShape(){
-        return shapes.get(shapes.size()-1);
+    public Shape getLastShape() {
+        if (shapes.size() > 0) {
+            return shapes.get(shapes.size() - 1);
+        }
+        return null;
     }
     public Texte createTexte(int x, int y, String texte ){
         return new Texte(x,y,texte,color, texteSize);
@@ -74,6 +81,9 @@ public class ShapesManager {
 
     public void setColor(int color){
         this.color = color;
+        if(isPolyLine()){
+            ((Polyline)getLastShape()).setColor(color);
+        }
     }
 
     public void resetBoard(){
