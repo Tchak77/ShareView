@@ -19,4 +19,9 @@ public class Point {
     public float getY() {
         return y;
     }
+
+    public void translate(int dx, int dy){
+        x += dx;
+        y += dy;
+    }
 }

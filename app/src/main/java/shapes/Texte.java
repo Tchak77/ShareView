@@ -38,4 +38,11 @@ public class Texte implements Shape{
         str += "{\"draw\": { \"shape\": \"text\", \"position\":["+x+","+y+"], \"content\": \""+text+"\" } }";
         return str;
     }
+
+    @Override
+    public void translate(int dx, int dy) {
+        x += dx;
+        y += dy;
+    }
+
 }

@@ -56,4 +56,13 @@ public class Polyline implements Shape {
         str.append("] } }");
         return str.toString();
     }
+
+    @Override
+    public void translate(int dx, int dy) {
+        for(Point point: points){
+            point.translate(dx, dy);
+        }
+    }
+
+
 }

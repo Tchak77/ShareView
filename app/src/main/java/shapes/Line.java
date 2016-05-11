@@ -44,4 +44,13 @@ public class Line implements Shape {
         str += "{\"draw\": { \"shape\": \"polyline\", \"coordinates\":[["+Xstart+","+Ystart+"],["+Xend+","+Yend+"]] } }";
         return str;
     }
+
+    @Override
+    public void translate(int dx, int dy) {
+        Xstart += dx;
+        Xend += dx;
+        Ystart += dy;
+        Yend += dy;
+    }
+
 }

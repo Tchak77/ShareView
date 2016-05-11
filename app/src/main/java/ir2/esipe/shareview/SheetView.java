@@ -37,6 +37,20 @@ public class SheetView extends View {
     public boolean onTouchEvent(final MotionEvent event){
 
         int action = event.getAction();
+        int nbFinger = event.getPointerCount();
+
+        if(nbFinger == 2){
+            if(action == MotionEvent.ACTION_POINTER_UP){
+                //On gère le déplacement dans le tableau
+                shapesManager.translate((int)(event.getRawX() - upperLeftX), (int) (event.getRawY()- upperLeftY ));
+                upperLeftX = -1;
+                upperLeftY = -1;
+                invalidate();
+                return true;
+            }
+        }
+
+
 
         if(shapesManager.isPolyLine()){
             if(action == MotionEvent.ACTION_DOWN){
@@ -67,17 +81,19 @@ public class SheetView extends View {
                 upperLeftY = event.getY();
                 return true;
 
+            //Quand on relève le doigt, on vérifie qu'on sort pas d'un translate et on dessine la forme
             case MotionEvent.ACTION_UP:
+                if(upperLeftX != -1) {
+                    if (shapesManager.isTexte()) {
+                        setTextOnBoard(event);
 
-                if(shapesManager.isTexte()){
-                    setTextOnBoard(event);
-
-                } else {
-                    shapesManager.addShape(shapesManager.createShape((int)upperLeftX, (int)upperLeftY, (int)(event.getX() - upperLeftX), (int)(event.getY() - upperLeftY)));
+                    } else {
+                        shapesManager.addShape(shapesManager.createShape((int) upperLeftX, (int) upperLeftY, (int) (event.getX() - upperLeftX), (int) (event.getY() - upperLeftY)));
+                    }
+                    upperLeftY = -1;
+                    upperLeftX = -1;
+                    invalidate();
                 }
-                upperLeftY = -1;
-                upperLeftX = -1;
-                invalidate();
                 return true;
             default:
                 return true;

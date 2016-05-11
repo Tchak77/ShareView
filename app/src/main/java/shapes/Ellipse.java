@@ -3,6 +3,7 @@ package shapes;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.util.Log;
 
 /**
  * Created by Kevin on 05/05/2016.
@@ -49,6 +50,15 @@ public class Ellipse implements Shape {
         str += "{\"draw\": { \"shape\": \"ellipse\", \"center\":["+X+","+Y+"], \"radius\": ["+width+","+height+"] } }";
         return str;
     }
+
+    @Override
+    public void translate(int dx, int dy) {
+        Log.v("toto", "De base: "+X+", "+Y+",   dx="+dx+"  dy="+dy);
+        this.X += dx;
+        this.Y += dy;
+        Log.v("toto", "Final: "+X+", "+Y);
+    }
+
 
 
 }

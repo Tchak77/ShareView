@@ -50,4 +50,12 @@ public class Rectangle implements Shape {
         str += "{\"draw\": { \"shape\": \"rectangle\", \"left\":"+X+", \"top\":"+Y+",\"right\":"+(X+width)+",\"bottom\":"+(Y+height)+"} }";
         return str;
     }
+
+    @Override
+    public void translate(int dx, int dy) {
+        X += dx;
+        Y += dy;
+    }
+
+
 }

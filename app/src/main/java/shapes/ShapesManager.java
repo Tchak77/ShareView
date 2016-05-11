@@ -111,5 +111,12 @@ public class ShapesManager {
     public void setStokeSize(int size) { stokeSize = size; }
 
 
+    public void translate(int dx, int dy){
+        for(Shape shape: shapes){
+            shape.translate(dx, dy);
+        }
+    }
+
+
 
 }
