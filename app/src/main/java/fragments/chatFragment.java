@@ -3,12 +3,10 @@ package fragments;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import ir2.esipe.shareview.R;
 
@@ -27,10 +25,8 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        inflater.inflate(R.layout.fragment_chat, container, false);
-        TextView textView = new TextView(getActivity());
-        textView.setText(R.string.hello_blank_fragment);
-        return textView;
+        return inflater.inflate(R.layout.fragment_chat, container, false);
+
     }
 
 
@@ -51,13 +47,8 @@ public class ChatFragment extends Fragment {
         mListener = null;
     }
 
-
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
     public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
+
     }
 
 }
