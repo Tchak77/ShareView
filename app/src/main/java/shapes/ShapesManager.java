@@ -3,8 +3,13 @@ package shapes;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 
 public class ShapesManager {
@@ -158,6 +163,95 @@ public class ShapesManager {
         return false;
     }
 
+
+    //TODO gestion des options
+    public void JSONparser(String jsonstr){
+        try {
+            JSONObject jsonRootObject = new JSONObject();
+            JSONArray jsonArray = jsonRootObject.optJSONArray("draw");
+
+            double width;
+            double height;
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                String forme = jsonObject.optString("shape");
+
+                switch (forme){
+                    case "ellipse":
+                        String center = jsonObject.optString("center");
+                        String radius = jsonObject.optString("radius");
+
+                        String[] radiusSize = radius.split(", ");
+
+                        width = Float.parseFloat(radiusSize[0].substring(1));
+                        height = Float.parseFloat(radiusSize[1].substring(0, (radiusSize[1]).length()-1));
+
+                        String[] centerCoords = center.split(", ");
+                        float centerX;
+                        float centerY;
+                        centerX = Float.parseFloat(centerCoords[0].substring(1)); // On enleve les []
+                        centerY = Float.parseFloat(centerCoords[1].substring(0, centerCoords[1].length()-1));
+
+                        centerX -= width/2;
+                        centerY -= height/2;
+
+                        shapes.add(new Ellipse((int)centerX, (int)centerY, (int)width, (int)height, Color.BLACK));
+                        break;
+
+
+                    case "rectangle":
+                        double left = jsonObject.optDouble("left");
+                        double right = jsonObject.optDouble("right");
+                        double top = jsonObject.optDouble("top");
+                        double bottom = jsonObject.optDouble("bottom");
+
+                        height = bottom - top;
+                        width = right - left;
+
+                        shapes.add(new Rectangle((int)left, (int)top, (int)width, (int)height, Color.BLACK));
+                        break;
+
+
+                    case "polyline":
+                        String coordinates = jsonObject.optString("coordinates");
+                        Polyline poly = null;
+
+                        coordinates = coordinates.substring(2, coordinates.length()-2);
+                        String[] coordinatesSingles = coordinates.split(Pattern.quote("], ["));
+                        for(String coord : coordinatesSingles){
+                            coord = coord.substring(1, coord.length()-1);
+                            String[] coordValues = coord.split(", ");
+                            float pointX = Float.parseFloat(coordValues[0]);
+                            float pointY = Float.parseFloat(coordValues[1]);
+
+                            if(poly == null){
+                                poly = new Polyline(pointX, pointY, Color.BLACK);
+                                shapes.add(poly);
+                            } else {
+                                poly.addPoint((int)pointX, (int)pointY);
+                            }
+
+                        }
+                        break;
+
+                    case "text":
+                        String position = jsonObject.optString("position");
+
+                        String[] positionXY = position.split(", ");
+
+                        float x = Float.parseFloat(positionXY[0].substring(1));
+                        float y = Float.parseFloat(positionXY[1].substring(0, (positionXY[1]).length()-1));
+                        String text = jsonObject.optString("content");
+                        shapes.add(new Texte((int)x, (int)y, text, Color.BLACK, 15));
+                        break;
+                }
+
+            }
+        } catch(JSONException je){
+            je.printStackTrace();
+        }
+    }
 
 
 }
