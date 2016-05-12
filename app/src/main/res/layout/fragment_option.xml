@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/txtSizeBar"
         android:max="100"
+        android:progress="15"
         android:indeterminate="false" />
 
 
@@ -34,6 +35,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/strokeSizeBar"
         android:max="100"
+        android:progress="15"
         android:indeterminate="false" />
 
 

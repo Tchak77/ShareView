@@ -32,10 +32,10 @@ public class Texte implements Shape{
     }
 
     @Override
-    public String toJSON() {
+    public String toJSON(int dx, int dy) {
         String str = "";
 
-        str += "{\"draw\": { \"shape\": \"text\", \"position\":["+x+","+y+"], \"content\": \""+text+"\" } }";
+        str += "{\"draw\": { \"shape\": \"text\", \"position\":["+(x-dx)+","+(y-dy)+"], \"content\": \""+text+"\" } }";
         return str;
     }
 

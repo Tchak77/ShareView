@@ -2,7 +2,6 @@ package fragments;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -200,6 +199,6 @@ public class BoardFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
+
     }
 }

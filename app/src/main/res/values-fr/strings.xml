@@ -9,4 +9,5 @@
     <string name="textSize">Taille du texte: </string>
     <string name="strokeSize">Epaisseur:</string>
     <string name="color">Couleur:</string>
+    <string name="userList">Liste des utilisateurs</string>
 </resources>

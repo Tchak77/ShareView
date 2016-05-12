@@ -1,21 +1,25 @@
 package fragments;
 
 
-import android.content.Context;
-import android.net.Uri;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import java.util.List;
+
+import ir2.esipe.shareview.MainActivity;
 import ir2.esipe.shareview.R;
 
 
 public class UsersFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+    private List<String> users;
 
     public UsersFragment() {
         // Required empty public constructor
@@ -23,12 +27,22 @@ public class UsersFragment extends Fragment {
 
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        users=((MainActivity)getActivity()).getUsers();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        inflater.inflate(R.layout.fragment_user, container, false);
-        TextView textView = new TextView(getActivity());
-        textView.setText(R.string.hello_blank_fragment);
-        return textView;
+        View rootView = inflater.inflate(R.layout.fragment_user, container, false);
+
+        ListView listView = (ListView)rootView.findViewById(R.id.listView);
+        ArrayAdapter arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.listitem_user, R.id.listitem_user_textview, users.toArray());
+        listView.setAdapter(arrayAdapter);
+
+
+        return rootView;
     }
 
 
@@ -51,12 +65,9 @@ public class UsersFragment extends Fragment {
     }
 
 
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 
     public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
+
     }
 }
 

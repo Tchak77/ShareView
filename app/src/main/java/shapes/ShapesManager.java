@@ -18,6 +18,9 @@ public class ShapesManager {
     private int texteSize = 15;
     private int stokeSize = 15;
 
+    private int indiceTranslationX = 0;
+    private int indiceTranslationY = 0;
+
 
     private ShapesManager(){
 
@@ -95,10 +98,10 @@ public class ShapesManager {
         this.shapes = shapes;
     }
 
-    public String JSON(){
+    public String toJSON(){
         StringBuilder strb = new StringBuilder();
         for(Shape shape: shapes){
-            strb.append(shape.toJSON());
+            strb.append(shape.toJSON(indiceTranslationX, indiceTranslationY));
         }
         return strb.toString();
     }
@@ -112,6 +115,9 @@ public class ShapesManager {
 
 
     public void translate(int dx, int dy){
+        indiceTranslationX += dx;
+        indiceTranslationY += dy;
+
         for(Shape shape: shapes){
             shape.translate(dx, dy);
         }

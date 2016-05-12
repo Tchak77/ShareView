@@ -46,11 +46,11 @@ public class Polyline implements Shape {
     }
 
     @Override
-    public String toJSON() {
+    public String toJSON(int dx, int dy) {
         StringBuilder str = new StringBuilder();
         str.append("{\"draw\": { \"shape\": \"polyline\", \"coordinates\":[");
         for(int i=0; i<points.size(); i++){
-            str.append("["+points.get(i).getX()+", "+points.get(i).getY()+"],");
+            str.append("["+(points.get(i).getX()-dx)+", "+(points.get(i).getY()-dy)+"],");
         }
         str.setLength(str.length()-1); // On enleve la dernere virgule
         str.append("] } }");

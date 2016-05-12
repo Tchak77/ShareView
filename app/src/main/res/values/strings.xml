@@ -9,6 +9,7 @@
     <!-- Home strings -->
     <string name="newBoard">Create New Board</string>
     <string name="joinBoard">Join existing Board</string>
+    <string name="pseudo" translatable="false">Pseudo</string>
     <string name="credits" translatable="false">©Tchakmakdjian Kévin, Mignon Frédéric, Gerber Xavier, ESIPE</string>
 
     <!-- Option strings -->
@@ -24,6 +25,9 @@
     <string name="toolbarChat" translatable="false">CHAT</string>
     <string name="toolbarUsers" translatable="false">USERS</string>
 
+
+    <!--Userlist fragment-->
+    <string name="userList">User List</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

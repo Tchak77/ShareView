@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <ir2.esipe.shareview.SheetView
         android:id="@+id/sheetView"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"/>
+        android:layout_width="wrap_content">
 
+    </ir2.esipe.shareview.SheetView>
     <LinearLayout
         android:id="@+id/toolbarDraw"
         android:layout_width="wrap_content"
@@ -58,6 +58,11 @@
 
     </LinearLayout>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bordureGauche"
+        android:src="@drawable/borduregd" />
+
 
 </FrameLayout>
-
