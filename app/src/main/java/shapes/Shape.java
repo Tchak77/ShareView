@@ -2,9 +2,7 @@ package shapes;
 
 import android.graphics.Canvas;
 
-/**
- * Created by Kevin on 05/05/2016.
- */
+
 public interface Shape {
 
     int ELLIPSE = 1;
@@ -17,5 +15,7 @@ public interface Shape {
     void draw(Canvas canvas);
     String toJSON(int dx, int dy);
     void translate(int dx, int dy);
+    int getX();
+    int getY();
 
 }

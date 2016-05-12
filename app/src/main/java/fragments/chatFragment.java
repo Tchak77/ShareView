@@ -10,13 +10,11 @@ import android.view.ViewGroup;
 
 import ir2.esipe.shareview.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 
 public class ChatFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+
     public ChatFragment() {
         // Required empty public constructor
     }

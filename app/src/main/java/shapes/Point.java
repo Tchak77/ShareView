@@ -1,8 +1,6 @@
 package shapes;
 
-/**
- * Created by Kevin on 08/05/2016.
- */
+
 public class Point {
     private float x;
     private float y;

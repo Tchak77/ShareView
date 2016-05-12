@@ -6,9 +6,7 @@ import android.graphics.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Kevin on 05/05/2016.
- */
+
 public class ShapesManager {
 
     private static ShapesManager manager;
@@ -121,6 +119,43 @@ public class ShapesManager {
         for(Shape shape: shapes){
             shape.translate(dx, dy);
         }
+    }
+
+
+    public boolean hasShapeOnTop(){
+        for(Shape shape: shapes){
+            if(shape.getX() < 0){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasShapeOnBottom(int bottom){
+        for(Shape shape: shapes){
+            if(shape.getX() > bottom){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasShapeOnLeft(){
+        for(Shape shape: shapes){
+            if(shape.getY() < 0){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasShapeOnRight(int right){
+        for(Shape shape: shapes){
+            if(shape.getY() > right){
+                return true;
+            }
+        }
+        return false;
     }
 
 

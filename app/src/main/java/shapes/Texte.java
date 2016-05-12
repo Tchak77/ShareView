@@ -3,9 +3,7 @@ package shapes;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-/**
- * Created by Kevin on 07/05/2016.
- */
+
 public class Texte implements Shape{
 
 
@@ -43,6 +41,14 @@ public class Texte implements Shape{
     public void translate(int dx, int dy) {
         x += dx;
         y += dy;
+    }
+
+    public int getX(){
+        return x;
+    }
+
+    public int getY(){
+        return y;
     }
 
 }

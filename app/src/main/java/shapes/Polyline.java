@@ -6,9 +6,7 @@ import android.graphics.Paint;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Kevin on 08/05/2016.
- */
+
 public class Polyline implements Shape {
 
 
@@ -50,7 +48,7 @@ public class Polyline implements Shape {
         StringBuilder str = new StringBuilder();
         str.append("{\"draw\": { \"shape\": \"polyline\", \"coordinates\":[");
         for(int i=0; i<points.size(); i++){
-            str.append("["+(points.get(i).getX()-dx)+", "+(points.get(i).getY()-dy)+"],");
+            str.append("[").append(points.get(i).getX()-dx).append(", ").append(points.get(i).getY()-dy).append("],");
         }
         str.setLength(str.length()-1); // On enleve la dernere virgule
         str.append("] } }");
@@ -62,6 +60,14 @@ public class Polyline implements Shape {
         for(Point point: points){
             point.translate(dx, dy);
         }
+    }
+
+
+    public int getX(){
+        return (int)points.get(0).getX();
+    }
+    public int getY(){
+        return (int)points.get(0).getY();
     }
 
 

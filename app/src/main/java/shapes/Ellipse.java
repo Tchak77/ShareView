@@ -5,9 +5,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.Log;
 
-/**
- * Created by Kevin on 05/05/2016.
- */
+
 public class Ellipse implements Shape {
 
     private int X;
@@ -59,6 +57,12 @@ public class Ellipse implements Shape {
         Log.v("toto", "Final: "+X+", "+Y);
     }
 
+    public int getX(){
+        return X;
+    }
+    public int getY(){
+        return Y;
+    }
 
 
 }

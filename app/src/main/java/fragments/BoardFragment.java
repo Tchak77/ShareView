@@ -19,9 +19,7 @@ import ir2.esipe.shareview.R;
 import shapes.Shape;
 import shapes.ShapesManager;
 
-/**
- * A placeholder fragment containing a simple view.
- */
+
 public class BoardFragment extends Fragment {
 
     private String title;
@@ -152,6 +150,7 @@ public class BoardFragment extends Fragment {
         } else {
             Log.e(MainActivity.class.getSimpleName(),"Error using toolbar listener");
         }
+
 
         return rootView;
     }

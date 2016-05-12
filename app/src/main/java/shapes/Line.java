@@ -3,9 +3,6 @@ package shapes;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-/**
- * Created by Kevin on 07/05/2016.
- */
 public class Line implements Shape {
 
 
@@ -51,6 +48,14 @@ public class Line implements Shape {
         Xend += dx;
         Ystart += dy;
         Yend += dy;
+    }
+
+
+    public int getX(){
+        return Xstart;
+    }
+    public int getY(){
+        return Ystart;
     }
 
 }
