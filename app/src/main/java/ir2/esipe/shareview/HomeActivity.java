@@ -43,8 +43,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
-        CreateQueue createQueue = new CreateQueue();
-        createQueue.execute("http://88.188.121.190:12345/queueName", "{\"author\": \"admin\",\"message\": {\"admin\" : \"join\"}}");
+
         GetQueues getTab = new GetQueues();
         getTab.execute("http://88.188.121.190:12345/");
     }
@@ -86,6 +85,8 @@ public class HomeActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         if(!input.getText().toString().trim().isEmpty()) {
                             title = input.getText().toString().trim();
+                            CreateQueue createQueue = new CreateQueue();
+                            createQueue.execute("http://88.188.121.190:12345/"+title, pseudo, "{\\\"admin\\\" : \\\"join\\\"}");
                             Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                             intent.putExtra("title", title);
                             intent.putExtra("pseudo", pseudo);
