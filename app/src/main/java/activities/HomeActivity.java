@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -129,7 +128,6 @@ public class HomeActivity extends AppCompatActivity {
                     EditText porttxt = (EditText) findViewById(R.id.port);
                     address_ip = ipaddress.getText().toString();
                     port = porttxt.getText().toString();
-                    Log.v("toto",address_ip+":"+port);
                     GetQueues getTab = new GetQueues();
                     try {
                         final List<String> queues = getTab.execute("http://" + address_ip + ":" + port + "/").get();

@@ -225,15 +225,11 @@ public class ShapesManager {
 
                     width = Float.parseFloat(radiusSize[0].substring(1));
                     height = Float.parseFloat(radiusSize[1].substring(0, (radiusSize[1]).length() - 1));
-
                     String[] centerCoords = center.split(",");
                     float centerX;
                     float centerY;
                     centerX = Float.parseFloat(centerCoords[0].substring(1)); // On enleve les []
                     centerY = Float.parseFloat(centerCoords[1].substring(0, centerCoords[1].length() - 1));
-
-                    centerX -= width / 2;
-                    centerY -= height / 2;
 
                     shapes.add(new Ellipse((int) centerX, (int) centerY, (int) width, (int) height, Color.BLACK));
                     break;
@@ -289,6 +285,7 @@ public class ShapesManager {
         } catch (JSONException je) {
             je.printStackTrace();
         }
+
     }
 
     public void setTitle(String title) {

@@ -3,7 +3,6 @@ package shapes;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.util.Log;
 
 
 public class Ellipse implements Shape {
@@ -31,6 +30,7 @@ public class Ellipse implements Shape {
             this.Y = Y;
             this.height = height;
         }
+
         this.color = color;
     }
 
@@ -51,10 +51,10 @@ public class Ellipse implements Shape {
 
     @Override
     public void translate(int dx, int dy) {
-        Log.v("toto", "De base: "+X+", "+Y+",   dx="+dx+"  dy="+dy);
+
         this.X += dx;
         this.Y += dy;
-        Log.v("toto", "Final: "+X+", "+Y);
+
     }
 
     public int getX(){
