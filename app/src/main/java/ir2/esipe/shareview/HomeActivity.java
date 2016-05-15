@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -108,8 +110,19 @@ public class HomeActivity extends AppCompatActivity {
                     GetQueues getTab = new GetQueues();
                     try {
                         List<String> queues = getTab.execute("http://"+address_ip+":"+port+"/").get();
+
                         if(queues!=null){
                             //Display the queues
+                            setContentView(R.layout.list_queues);
+                            ListView listView = (ListView)findViewById(R.id.list_queues);
+                            ArrayAdapter arrayAdapter = new ArrayAdapter<>(HomeActivity.this, R.layout.list_item_queues, R.id.listitem_queues_textview, queues.toArray());
+                            listView.setAdapter(arrayAdapter);
+
+                            //Pick the queue
+
+
+
+
                         }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
