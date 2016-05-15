@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,21 +17,16 @@ import java.util.concurrent.ExecutionException;
 import asyncTasks.GetQueues;
 import asyncTasks.SendQueueMessage;
 
-
-
 public class HomeActivity extends AppCompatActivity {
 
 
     private String title = "";
     private String pseudo = "";
-    private String address_ip ;
-    private String port ;
-
-
+    private String address_ip;
+    private String port;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
         builder.setTitle(R.string.pseudo);
@@ -63,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void createMenuView() {
-        setContentView(R.layout.home_activity);
+        setContentView(R.layout.activity_home_activity);
 
         Button newBoardBtn = (Button) findViewById(R.id.newBoardBtn);
         Button joinBoardBtn = (Button) findViewById(R.id.joinBoardBtn);
@@ -119,7 +112,7 @@ public class HomeActivity extends AppCompatActivity {
             });
         }
 
-        if(joinBoardBtn!=null){
+        if (joinBoardBtn != null) {
             joinBoardBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -129,14 +122,13 @@ public class HomeActivity extends AppCompatActivity {
                     port = porttxt.getText().toString();
                     Log.v("toto",address_ip+":"+port);
                     GetQueues getTab = new GetQueues();
-
                     try {
-                        final List<String> queues = getTab.execute("http://"+address_ip+":"+port+"/").get();
+                        final List<String> queues = getTab.execute("http://" + address_ip + ":" + port + "/").get();
 
-                        if(queues!=null){
+                        if (queues != null) {
                             //Display the queues
                             setContentView(R.layout.list_queues);
-                            ListView listView = (ListView)findViewById(R.id.list_queues);
+                            ListView listView = (ListView) findViewById(R.id.list_queues);
                             ArrayAdapter arrayAdapter = new ArrayAdapter<>(HomeActivity.this, R.layout.list_item_queues, R.id.listitem_queues_textview, queues.toArray());
                             listView.setAdapter(arrayAdapter);
 
@@ -145,6 +137,8 @@ public class HomeActivity extends AppCompatActivity {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     String boardName = queues.get(position);
+                                    GetQueueMessage getQueueMessage = new GetQueueMessage();
+                                    getQueueMessage.execute("http://" + address_ip + ":" + port + "/",boardName);
                                 }
                             });
                         }

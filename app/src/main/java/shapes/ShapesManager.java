@@ -169,7 +169,9 @@ public class ShapesManager {
         try {
             JSONObject jsonRootObject = new JSONObject(jsonstr);
             JSONArray jsonArray = jsonRootObject.optJSONArray("draw");
-
+            if(jsonArray==null){
+                return;
+            }
             double width;
             double height;
             for (int i = 0; i < jsonArray.length(); i++) {
