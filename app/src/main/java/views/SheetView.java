@@ -1,4 +1,4 @@
-package ir2.esipe.shareview;
+package views;
 
 
 import android.content.Context;
@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
+import activities.R;
 import shapes.Polyline;
 import shapes.ShapesManager;
 

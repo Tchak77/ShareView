@@ -13,7 +13,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import ir2.esipe.shareview.R;
+import activities.R;
 
 
 public class ChatFragment extends Fragment {

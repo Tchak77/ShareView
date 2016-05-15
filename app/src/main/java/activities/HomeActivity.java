@@ -1,4 +1,4 @@
-package ir2.esipe.shareview;
+package activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +13,9 @@ import android.widget.ListView;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import asyncTasks.GetQueues;
+import asyncTasks.SendQueueMessage;
 
 public class HomeActivity extends AppCompatActivity {
 

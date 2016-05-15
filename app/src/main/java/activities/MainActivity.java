@@ -1,4 +1,4 @@
-package ir2.esipe.shareview;
+package activities;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;

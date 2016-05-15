@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ir2.esipe.shareview.SheetView
+    <views.SheetView
         android:id="@+id/sheetView"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content">
 
 
-    </ir2.esipe.shareview.SheetView>
+    </views.SheetView>
 
 
     <LinearLayout

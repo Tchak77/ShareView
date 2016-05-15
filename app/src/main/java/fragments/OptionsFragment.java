@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 
-import ir2.esipe.shareview.R;
+import activities.R;
 import shapes.ShapesManager;
 
 

@@ -14,8 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
-import ir2.esipe.shareview.MainActivity;
-import ir2.esipe.shareview.R;
+import activities.MainActivity;
+import activities.R;
 import shapes.Shape;
 import shapes.ShapesManager;
 

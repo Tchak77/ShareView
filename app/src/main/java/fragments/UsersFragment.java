@@ -12,8 +12,8 @@ import android.widget.ListView;
 
 import java.util.List;
 
-import ir2.esipe.shareview.MainActivity;
-import ir2.esipe.shareview.R;
+import activities.MainActivity;
+import activities.R;
 
 
 public class UsersFragment extends Fragment {
