@@ -19,6 +19,7 @@ import java.util.concurrent.ExecutionException;
 import asyncTasks.GetQueueMessage;
 import asyncTasks.GetQueues;
 import asyncTasks.SendQueueMessage;
+import shapes.ShapesManager;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -51,6 +52,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(!input.getText().toString().trim().isEmpty()){
                     pseudo = input.getText().toString().trim();
+                    ShapesManager.getSingleton(pseudo);
                     createMenuView();
                     dialog.dismiss();
                 }

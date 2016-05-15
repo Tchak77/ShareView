@@ -20,6 +20,7 @@ public class ShapesManager {
     private int color = Color.BLACK;
     private int texteSize = 15;
     private int stokeSize = 15;
+    private String pseudo;
 
     private int indiceTranslationX = 0;
     private int indiceTranslationY = 0;
@@ -35,6 +36,12 @@ public class ShapesManager {
         if(manager == null){
             manager = new ShapesManager();
         }
+        return manager;
+    }
+
+    public static ShapesManager getSingleton(String pseudo){
+        getSingleton();
+        manager.pseudo = pseudo;
         return manager;
     }
 
