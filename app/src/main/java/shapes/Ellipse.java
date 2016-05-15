@@ -45,7 +45,7 @@ public class Ellipse implements Shape {
     @Override
     public String toJSON(int dx, int dy) {
         String str = "";
-        str += "{\"draw\": { \"shape\": \"ellipse\", \"center\":["+(X-dx)+","+(Y-dy)+"], \"radius\": ["+width+","+height+"] } }";
+        str += "{\\\"draw\\\": { \\\"shape\\\": \\\"ellipse\\\", \\\"center\\\":["+(X-dx)+","+(Y-dy)+"], \\\"radius\\\": ["+width+","+height+"] } }";
         return str;
     }
 

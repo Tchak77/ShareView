@@ -46,7 +46,7 @@ public class Polyline implements Shape {
     @Override
     public String toJSON(int dx, int dy) {
         StringBuilder str = new StringBuilder();
-        str.append("{\"draw\": { \"shape\": \"polyline\", \"coordinates\":[");
+        str.append("{\\\"draw\\\": { \\\"shape\\\": \\\"polyline\\\", \\\"coordinates\\\":[");
         for(int i=0; i<points.size(); i++){
             str.append("[").append(points.get(i).getX()-dx).append(", ").append(points.get(i).getY()-dy).append("],");
         }

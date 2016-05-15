@@ -45,7 +45,7 @@ public class Rectangle implements Shape {
     public String toJSON(int dx, int dy) {
         String str = "";
 
-        str += "{\"draw\": { \"shape\": \"rectangle\", \"left\":"+(X-dx)+", \"top\":"+(Y-dy)+",\"right\":"+(X+width)+",\"bottom\":"+(Y+height)+"} }";
+        str += "{\\\"draw\\\": { \\\"shape\\\": \\\"rectangle\\\", \\\"left\\\":"+(X-dx)+", \\\"top\\\":"+(Y-dy)+",\\\"right\\\":"+(X+width)+",\\\"bottom\\\":"+(Y+height)+"} }";
         return str;
     }
 

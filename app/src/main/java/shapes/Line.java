@@ -38,7 +38,7 @@ public class Line implements Shape {
     public String toJSON(int dx, int dy) {
         String str = "";
 
-        str += "{\"draw\": { \"shape\": \"polyline\", \"coordinates\":[["+(Xstart-dx)+","+(Ystart-dy)+"],["+(Xend-dx)+","+(Yend-dy)+"]] } }";
+        str += "{\\\"draw\\\": { \\\"shape\\\": \\\"polyline\\\", \\\"coordinates\\\":[["+(Xstart-dx)+","+(Ystart-dy)+"],["+(Xend-dx)+","+(Yend-dy)+"]] } }";
         return str;
     }
 

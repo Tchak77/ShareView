@@ -104,7 +104,11 @@ public class HomeActivity extends AppCompatActivity {
                             SendQueueMessage sendQueueMessage = new SendQueueMessage();
                             address_ip = ipaddress.getText().toString();
                             port = porttxt.getText().toString();
-                            sendQueueMessage.execute("http://"+address_ip+":"+port+"/"+title, pseudo, "{\\\"admin\\\" : \\\"join\\\"}");
+                            sendQueueMessage.execute(address_ip, port, title, pseudo, "{\\\"admin\\\" : \\\"join\\\"}");
+                            ShapesManager manager = ShapesManager.getSingleton();
+                            manager.setTitle(title);
+                            manager.setAddressIp(address_ip);
+                            manager.setPort(port);
                             Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                             intent.putExtra("title", title);
                             intent.putExtra("pseudo", pseudo);
@@ -144,6 +148,14 @@ public class HomeActivity extends AppCompatActivity {
                                     String boardName = queues.get(position);
                                     GetQueueMessage getQueueMessage = new GetQueueMessage();
                                     getQueueMessage.execute("http://" + address_ip + ":" + port + "/",boardName);
+                                    ShapesManager manager = ShapesManager.getSingleton();
+                                    manager.setTitle(boardName);
+                                    manager.setAddressIp(address_ip);
+                                    manager.setPort(port);
+                                    Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                                    intent.putExtra("title", boardName);
+                                    intent.putExtra("pseudo", pseudo);
+                                    startActivity(intent);
                                 }
                             });
                         }

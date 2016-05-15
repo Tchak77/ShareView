@@ -15,9 +15,9 @@ public class SendQueueMessage extends AsyncTask<String, Void, Void> {
     @Override
     protected Void doInBackground(String... params) {
         try{
-            URL url = new URL(params[0]);
-            String pseudo = params[1];
-            String message = params[2];
+            URL url = new URL("http://"+params[0]+":"+params[1]+"/"+params[2]);
+            String pseudo = params[3];
+            String message = params[4];
 
             HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
             httpcon.setDoOutput(true);
