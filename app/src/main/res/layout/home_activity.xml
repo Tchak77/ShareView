@@ -56,7 +56,6 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="numberSigned"
             android:ems="7"
             android:id="@+id/ipaddress"
             android:text="88.188.121.190"
@@ -75,6 +74,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:inputType="numberSigned"
             android:ems="6"
             android:id="@+id/port"
             android:text="12345"
