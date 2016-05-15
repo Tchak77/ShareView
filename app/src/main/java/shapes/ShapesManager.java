@@ -167,7 +167,7 @@ public class ShapesManager {
     //TODO gestion des options
     public void JSONparser(String jsonstr){
         try {
-            JSONObject jsonRootObject = new JSONObject();
+            JSONObject jsonRootObject = new JSONObject(jsonstr);
             JSONArray jsonArray = jsonRootObject.optJSONArray("draw");
 
             double width;

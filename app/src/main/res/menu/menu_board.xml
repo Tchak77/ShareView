@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools/"
-    tools:context="ir2.esipe.shareview.BoardFragment"
+    tools:context="fragments.BoardFragment"
     >
     <item android:id="@+id/reset"
         android:title="@string/resetBoard"

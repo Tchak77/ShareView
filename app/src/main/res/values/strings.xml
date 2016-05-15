@@ -9,7 +9,12 @@
     <!-- Home strings -->
     <string name="newBoard">Create New Board</string>
     <string name="joinBoard">Join existing Board</string>
+    <string name="options">Connexion Params</string>
     <string name="pseudo" translatable="false">Pseudo</string>
+
+
+    <string name="ipaddress">Server IP address: </string>
+    <string name="port">Port: </string>
     <string name="credits" translatable="false">©Tchakmakdjian Kévin, Mignon Frédéric, Gerber Xavier, ESIPE</string>
 
     <!-- Option strings -->
@@ -28,5 +33,10 @@
 
     <!--Userlist fragment-->
     <string name="userList">User List</string>
+
+
+
+
+    <string name="submit">Submit</string>
 
 </resources>
