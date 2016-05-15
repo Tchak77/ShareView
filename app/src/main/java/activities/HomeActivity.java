@@ -12,12 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import asyncTasks.GetQueueMessage;
 import asyncTasks.GetQueues;
 import asyncTasks.SendQueueMessage;
+import shapes.Shape;
 import shapes.ShapesManager;
 
 public class HomeActivity extends AppCompatActivity {
@@ -108,6 +110,7 @@ public class HomeActivity extends AppCompatActivity {
                             manager.setTitle(title);
                             manager.setAddressIp(address_ip);
                             manager.setPort(port);
+                            manager.setBoard(new ArrayList<Shape>());
                             Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                             intent.putExtra("title", title);
                             intent.putExtra("pseudo", pseudo);
@@ -147,6 +150,7 @@ public class HomeActivity extends AppCompatActivity {
                                     GetQueueMessage getQueueMessage = new GetQueueMessage();
                                     getQueueMessage.execute("http://" + address_ip + ":" + port + "/",boardName);
                                     ShapesManager manager = ShapesManager.getSingleton();
+                                    manager.setBoard(new ArrayList<Shape>());
                                     manager.setTitle(boardName);
                                     manager.setAddressIp(address_ip);
                                     manager.setPort(port);

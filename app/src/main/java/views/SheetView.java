@@ -20,7 +20,7 @@ public class SheetView extends View {
 
     private float upperLeftX = -1;
     private float upperLeftY = -1;
-
+    private boolean lastShapePolyLine = false;
     public SheetView(Context context) {
         super(context);
 
@@ -52,6 +52,7 @@ public class SheetView extends View {
 
 
         if(shapesManager.isPolyLine()){
+            lastShapePolyLine = true;
             if(action == MotionEvent.ACTION_DOWN){
 
                 if(shapesManager.getLastShape() != null && shapesManager.getLastShape() instanceof Polyline && ((Polyline) shapesManager.getLastShape()).getPoint() != null ){
@@ -73,6 +74,11 @@ public class SheetView extends View {
                 }
             }
             return true;
+        }
+        if(lastShapePolyLine == true){
+            Polyline polyline = (Polyline) shapesManager.getLastShape();
+            shapesManager.sendPolylineShape(polyline);
+            lastShapePolyLine = false;
         }
         switch (action){
             case MotionEvent.ACTION_DOWN:

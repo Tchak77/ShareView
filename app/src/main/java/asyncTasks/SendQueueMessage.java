@@ -47,5 +47,4 @@ public class SendQueueMessage extends AsyncTask<String, Void, Void> {
         }
         return null;
     }
-
 }

@@ -19,6 +19,7 @@ public class ShapesManager {
     private static ShapesManager manager;
     private List<Shape> shapes;
     private int current;
+    private boolean finishPolyLine = false;
     private int color = Color.BLACK;
     private int texteSize = 15;
     private int stokeSize = 15;
@@ -103,11 +104,14 @@ public class ShapesManager {
                 return line;
 
             case Shape.POLYLINE:
-                Polyline polyline = new Polyline(x, y, color);
-                sendQueueMessage.execute(addressIp, port, title, pseudo, polyline.toJSON(indiceTranslationX, indiceTranslationY));
-                return polyline;
+                return new Polyline(x, y, color);
         }
         return null;
+    }
+
+    public void sendPolylineShape(Polyline polyline){
+        SendQueueMessage sendQueueMessage = new SendQueueMessage();
+        sendQueueMessage.execute(addressIp, port, title, pseudo, polyline.toJSON(indiceTranslationX, indiceTranslationY));
     }
 
     public Shape getLastShape() {

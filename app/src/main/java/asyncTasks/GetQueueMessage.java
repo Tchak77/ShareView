@@ -52,7 +52,6 @@ public class GetQueueMessage extends AsyncTask<String, Void, Void> {
             }while(message != null);
 
 
-
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
