@@ -62,14 +62,14 @@
     </LinearLayout>
 
     <FrameLayout
-        android:layout_width="10dp"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_gravity="left|center_vertical"
         android:background="#FFFF00"
         android:id="@+id/leftborder"></FrameLayout>
 
     <FrameLayout
-        android:layout_width="10dp"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_gravity="right|center_vertical"
         android:background="#FFFF00"
@@ -77,14 +77,14 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="0dp"
         android:layout_gravity="center_horizontal|top"
         android:background="#FFFF00"
         android:id="@+id/topborder"></FrameLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="0dp"
         android:layout_gravity="center_horizontal|bottom"
         android:background="#FFFF00"
         android:id="@+id/bottomborder"
