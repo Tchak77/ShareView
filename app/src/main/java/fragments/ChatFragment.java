@@ -38,7 +38,7 @@ public class ChatFragment extends Fragment {
         View rootView =  inflater.inflate(R.layout.fragment_chat, container, false);
 
 
-        ListView listView = (ListView)rootView.findViewById(R.id.listView);
+        ListView listView = (ListView)rootView.findViewById(R.id.chatList);
         ArrayAdapter arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.listitem_chat, R.id.listitem_chat_textview, messages.toArray());
         listView.setAdapter(arrayAdapter);
 
