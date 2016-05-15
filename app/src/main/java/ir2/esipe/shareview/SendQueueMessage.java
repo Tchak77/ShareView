@@ -10,10 +10,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class CreateQueue  extends AsyncTask<String, Void, Integer> {
+public class SendQueueMessage extends AsyncTask<String, Void, Void> {
 
     @Override
-    protected Integer doInBackground(String... params) {
+    protected Void doInBackground(String... params) {
         try{
             URL url = new URL(params[0]);
             String pseudo = params[1];
@@ -37,12 +37,10 @@ public class CreateQueue  extends AsyncTask<String, Void, Integer> {
                 return null;
             }
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                buffer.append(line + "\n");
+            String line = reader.readLine();
+            if(line == null){
+                return null;
             }
-            Log.v("[ASSYNCTASK]", buffer.toString());
         }
         catch (Exception e){
 

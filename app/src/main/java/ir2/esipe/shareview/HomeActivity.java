@@ -9,11 +9,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 public class HomeActivity extends AppCompatActivity {
 
 
     private String title = "";
     private String pseudo = "";
+    private String address_ip = "88.188.121.190";
+    private String port = "12345";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +48,6 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
-
-        GetQueues getTab = new GetQueues();
-        getTab.execute("http://88.188.121.190:12345/");
     }
 
     private void createMenuView() {
@@ -85,8 +87,8 @@ public class HomeActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         if(!input.getText().toString().trim().isEmpty()) {
                             title = input.getText().toString().trim();
-                            CreateQueue createQueue = new CreateQueue();
-                            createQueue.execute("http://88.188.121.190:12345/"+title, pseudo, "{\\\"admin\\\" : \\\"join\\\"}");
+                            SendQueueMessage sendQueueMessage = new SendQueueMessage();
+                            sendQueueMessage.execute("http://"+address_ip+":"+port+"/"+title, pseudo, "{\\\"admin\\\" : \\\"join\\\"}");
                             Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                             intent.putExtra("title", title);
                             intent.putExtra("pseudo", pseudo);
@@ -95,6 +97,25 @@ public class HomeActivity extends AppCompatActivity {
                         }
                     }
                 });
+                }
+            });
+        }
+
+        if(joinBoardBtn!=null){
+            joinBoardBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    GetQueues getTab = new GetQueues();
+                    try {
+                        List<String> queues = getTab.execute("http://"+address_ip+":"+port+"/").get();
+                        if(queues!=null){
+                            //Display the queues
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
         }
