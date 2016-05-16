@@ -16,4 +16,5 @@
     <string name="options">Options de connexion</string>
     <string name="send">Envoyer</string>
     <string name="defaulttext">Entrez votre texte ici</string>
+    <string name="leaveBoard">Quitte le tableau</string>
 </resources>

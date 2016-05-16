@@ -2,6 +2,7 @@ package fragments;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import activities.HomeActivity;
 import activities.MainActivity;
 import activities.R;
 import shapes.Shape;
@@ -166,6 +168,12 @@ public class BoardFragment extends Fragment {
             ShapesManager.getSingleton().resetBoard();
             getActivity().findViewById(R.id.sheetView).invalidate();
             return true;
+        }
+
+        if(item.getItemId() == R.id.leaveBoard){
+            //Leave the board
+            Intent intent = new Intent(getActivity(), HomeActivity.class);
+            startActivity(intent);
         }
 
         return true;

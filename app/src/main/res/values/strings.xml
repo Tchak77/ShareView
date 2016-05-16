@@ -2,6 +2,7 @@
     <string name="app_name" translatable="false">ShareView</string>
     <string name="action_settings">Settings</string>
     <string name="resetBoard">Reset the board</string>
+    <string name="leaveBoard">Leave the board</string>
     <string name="title_activity_home_activity" translatable="false">home_activity</string>
 
     <string name="title">Title</string>
