@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import messages.MessagesManager;
 import shapes.ShapesManager;
 
 public class GetQueueMessage extends AsyncTask<String, Void, Void> {
@@ -24,6 +25,7 @@ public class GetQueueMessage extends AsyncTask<String, Void, Void> {
         int i = 0;
         int timeout = 1;
         ShapesManager shapesManager = ShapesManager.getSingleton();
+        MessagesManager messagesManager = MessagesManager.getSingleton();
         try {
             do{
                 URL url = new URL(params[0]+params[1]+"/"+i+"?timeout="+timeout);
@@ -47,7 +49,12 @@ public class GetQueueMessage extends AsyncTask<String, Void, Void> {
 
                 JSONObject jsonRootObject = new JSONObject(line);
                 message = jsonRootObject.getString("message");
-                shapesManager.JSONparser(message);
+                if(message.contains("draw")){
+                    shapesManager.JSONparser(message);
+                } else {
+                    String pseudo = jsonRootObject.getString("author");
+                    messagesManager.JSONparser(pseudo, message);
+                }
                 i++;
             }while(message != null);
 

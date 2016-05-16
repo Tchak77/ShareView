@@ -213,9 +213,6 @@ public class ShapesManager {
     public void JSONparser(String jsonstr) {
         try {
             JSONObject jsonRootObject = new JSONObject(jsonstr);
-            if (!jsonRootObject.has("draw")) {
-                return;
-            }
             JSONObject jsonObject = jsonRootObject.getJSONObject("draw");
             double width;
             double height;

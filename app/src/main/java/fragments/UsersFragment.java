@@ -12,8 +12,8 @@ import android.widget.ListView;
 
 import java.util.List;
 
-import activities.MainActivity;
 import activities.R;
+import messages.MessagesManager;
 
 
 public class UsersFragment extends Fragment {
@@ -29,7 +29,8 @@ public class UsersFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        users=((MainActivity)getActivity()).getUsers();
+        MessagesManager manager = MessagesManager.getSingleton();
+        users= manager.getUsers();
     }
 
     @Override

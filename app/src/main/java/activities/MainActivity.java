@@ -9,9 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import fragments.BoardFragment;
 import fragments.ChatFragment;
 import fragments.OptionsFragment;
@@ -25,8 +22,6 @@ public class MainActivity extends AppCompatActivity implements OptionsFragment.O
     private String title;
     private String pseudo;
 
-    private List<String> users;
-
     private FragmentManager fragmentManager;
     private BoardFragment boardFragment;
     private OptionsFragment optionsFragment;
@@ -38,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements OptionsFragment.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        users = new ArrayList<>();
         boardFragment = new BoardFragment();
         optionsFragment = new OptionsFragment();
         chatFragment = new ChatFragment();
@@ -122,10 +116,5 @@ public class MainActivity extends AppCompatActivity implements OptionsFragment.O
         // as you specify a parent activity in AndroidManifest.xml.
 
         return super.onOptionsItemSelected(item);
-    }
-
-
-    public List<String> getUsers(){
-        return users;
     }
 }

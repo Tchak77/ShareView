@@ -10,16 +10,17 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import activities.R;
+import messages.Message;
+import messages.MessagesManager;
 
 
 public class ChatFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
-    private List<String> messages;
+    private List<Message> messages;
 
     public ChatFragment() {
         // Required empty public constructor
@@ -29,7 +30,8 @@ public class ChatFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        messages =  new ArrayList<>();
+        MessagesManager manager = MessagesManager.getSingleton();
+        messages = manager.getMessages();
     }
 
     @Override

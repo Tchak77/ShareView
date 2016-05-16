@@ -19,6 +19,8 @@ import java.util.concurrent.ExecutionException;
 import asyncTasks.GetQueueMessage;
 import asyncTasks.GetQueues;
 import asyncTasks.SendQueueMessage;
+import messages.Message;
+import messages.MessagesManager;
 import shapes.Shape;
 import shapes.ShapesManager;
 
@@ -146,14 +148,21 @@ public class HomeActivity extends AppCompatActivity {
                             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                                     String boardName = queues.get(position);
-                                    GetQueueMessage getQueueMessage = new GetQueueMessage();
-                                    getQueueMessage.execute("http://" + address_ip + ":" + port + "/",boardName);
+                                    MessagesManager messagesManager = MessagesManager.getSingleton();
+                                    messagesManager.setUsers(new ArrayList<String>());
+                                    messagesManager.setMessages(new ArrayList<Message>());
+                                    SendQueueMessage sendQueueMessage = new SendQueueMessage();
+                                    sendQueueMessage.execute(address_ip, port, boardName, pseudo, "{\\\"admin\\\" : \\\"join\\\"}");
                                     ShapesManager manager = ShapesManager.getSingleton();
                                     manager.setBoard(new ArrayList<Shape>());
                                     manager.setTitle(boardName);
                                     manager.setAddressIp(address_ip);
                                     manager.setPort(port);
+                                    GetQueueMessage getQueueMessage = new GetQueueMessage();
+                                    getQueueMessage.execute("http://" + address_ip + ":" + port + "/",boardName);
+
                                     Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                                     intent.putExtra("title", boardName);
                                     intent.putExtra("pseudo", pseudo);
