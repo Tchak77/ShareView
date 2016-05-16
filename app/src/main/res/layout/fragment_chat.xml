@@ -9,14 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="407dp"
         android:id="@+id/chatList"
-        android:layout_weight="0.91"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
 
 
     </ListView>
 
-    <TextView
+    <EditText
         android:layout_width="246dp"
         android:layout_height="87dp"
         android:text="@string/defaulttext"
