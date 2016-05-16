@@ -15,4 +15,5 @@
     <string name="submit">Valider</string>
     <string name="options">Options de connexion</string>
     <string name="send">Envoyer</string>
+    <string name="defaulttext">Entrez votre texte ici</string>
 </resources>
