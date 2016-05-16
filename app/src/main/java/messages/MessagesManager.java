@@ -1,5 +1,7 @@
 package messages;
 
+import android.widget.ArrayAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +15,8 @@ public class MessagesManager {
     private String addressIp;
     private String port;
     private String title;
+    private ArrayAdapter<Message> messageArrayAdapter;
+    private ArrayAdapter<String> userArrayAdapter;
 
     private MessagesManager() {
         messages = new ArrayList<>();
@@ -32,40 +36,53 @@ public class MessagesManager {
         return manager;
     }
 
-    public void sendMessage(String message){
-        messages.add(new Message(pseudo, message));
+    public void sendMessage(String messageStr) {
+        Message message = new Message(pseudo, messageStr);
+        messages.add(message);
+        if (messageArrayAdapter != null) {
+            messageArrayAdapter.notifyDataSetChanged();
+        }
         SendQueueMessage sendQueueMessage = new SendQueueMessage();
-        sendQueueMessage.execute(addressIp, port, title, pseudo, message);
+        sendQueueMessage.execute(addressIp, port, title, pseudo, messageStr);
     }
 
     public void JSONparser(String pseudo, String jsonstr) {
         if (jsonstr.contains("admin")) {
             if (jsonstr.contains("join")) {
-                if(!users.contains(pseudo)) {
+                if (!users.contains(pseudo)) {
                     users.add(pseudo);
+                    if (userArrayAdapter != null) {
+                        userArrayAdapter.notifyDataSetChanged();
+                    }
                 }
             } else {
                 users.remove(pseudo);
+                if (userArrayAdapter != null) {
+                    userArrayAdapter.notifyDataSetChanged();
+                }
             }
             return;
         } else {
-            messages.add(new Message(pseudo,jsonstr));
+            messages.add(new Message(pseudo, jsonstr));
+            if (messageArrayAdapter != null) {
+                messageArrayAdapter.notifyDataSetChanged();
+            }
         }
     }
 
-    public void informConnection(){
+    public void informConnection() {
         SendQueueMessage sendQueueMessage = new SendQueueMessage();
         sendQueueMessage.execute(addressIp, port, title, pseudo, "{\\\"admin\\\" : \\\"join\\\"}");
     }
 
-    public void informDeconnection(){
+    public void informDeconnection() {
         SendQueueMessage sendQueueMessage = new SendQueueMessage();
         sendQueueMessage.execute(addressIp, port, title, pseudo, "{\\\"admin\\\" : \\\"leave\\\"}");
         users = new ArrayList<String>();
         messages = new ArrayList<Message>();
     }
 
-    public void reintializeManager(){
+    public void reintializeManager() {
         this.users = new ArrayList<>();
         this.messages = new ArrayList<>();
     }
@@ -77,6 +94,15 @@ public class MessagesManager {
     public List<String> getUsers() {
         return users;
     }
+
+    public void setUserAdapter(ArrayAdapter<String> userArrayAdapter){
+        this.userArrayAdapter = userArrayAdapter;
+    }
+
+    public void setMessageAdapter(ArrayAdapter<Message> messageArrayAdapter){
+        this.messageArrayAdapter = messageArrayAdapter;
+    }
+
 
     public void setTitle(String title) {
         this.title = title;

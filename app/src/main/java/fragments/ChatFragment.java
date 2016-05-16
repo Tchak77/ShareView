@@ -43,7 +43,7 @@ public class ChatFragment extends Fragment {
 
 
         ListView listView = (ListView)rootView.findViewById(R.id.chatList);
-        final ArrayAdapter arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.listitem_chat, R.id.listitem_chat_textview, messages.toArray());
+        final ArrayAdapter<Message> arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.listitem_chat, R.id.listitem_chat_textview, messages);
         listView.setAdapter(arrayAdapter);
 
         Button send = (Button) rootView.findViewById(R.id.send);
@@ -53,8 +53,8 @@ public class ChatFragment extends Fragment {
                 EditText editText = (EditText) rootView.findViewById(R.id.textContent);
                 String str = editText.getText().toString();
                 MessagesManager messagesManager = MessagesManager.getSingleton();
+                messagesManager.setMessageAdapter(arrayAdapter);
                 messagesManager.sendMessage(str);
-                arrayAdapter.notifyDataSetChanged();
             }
         });
 

@@ -1,7 +1,6 @@
 package asyncTasks;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -26,7 +25,6 @@ public class SendQueueMessage extends AsyncTask<String, Void, Void> {
             httpcon.connect();
 
             DataOutputStream os = new DataOutputStream(httpcon.getOutputStream());
-            Log.v("TEST","author="+pseudo+"&message=\""+message+"\"");
             os.write(("author="+pseudo+"&message=\""+message+"\"").getBytes("UTF-8"));
             os.close();
 

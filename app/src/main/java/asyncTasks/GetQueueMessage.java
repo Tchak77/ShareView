@@ -55,8 +55,10 @@ public class GetQueueMessage extends AsyncTask<String, Void, Void> {
                     String pseudo = jsonRootObject.getString("author");
                     messagesManager.JSONparser(pseudo, message);
                 }
-                i++;
-            }while(message != null);
+                if(message!=null){
+                    i++;
+                }
+            }while(true);
 
 
         } catch (IOException e) {
