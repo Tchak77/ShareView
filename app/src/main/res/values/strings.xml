@@ -9,7 +9,6 @@
     <!-- Home strings -->
     <string name="newBoard">Create New Board</string>
     <string name="joinBoard">Join existing Board</string>
-    <string name="options">Connexion Params</string>
     <string name="pseudo" translatable="false">Pseudo</string>
 
 
@@ -36,7 +35,7 @@
 
 
 
-
+    <string name="send">Send</string>
     <string name="submit">Submit</string>
 
 </resources>

@@ -10,9 +10,9 @@
     <string name="strokeSize">Epaisseur:</string>
     <string name="color">Couleur:</string>
     <string name="userList">Liste des utilisateurs</string>
-    <string name="setConnParams">Paramètres de connexion</string>
     <string name="ipaddress">Adresse IP du serveur: </string>
     <string name="port">Port: </string>
     <string name="submit">Valider</string>
     <string name="options">Options de connexion</string>
+    <string name="send">Envoyer</string>
 </resources>
