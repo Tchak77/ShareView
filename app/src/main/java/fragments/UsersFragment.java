@@ -41,7 +41,7 @@ public class UsersFragment extends Fragment {
         ListView listView = (ListView)rootView.findViewById(R.id.listView);
         ArrayAdapter arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.listitem_user, R.id.listitem_user_textview, users.toArray());
         listView.setAdapter(arrayAdapter);
-
+        MessagesManager.getSingleton().setUserAdapter(arrayAdapter);
 
         return rootView;
     }
