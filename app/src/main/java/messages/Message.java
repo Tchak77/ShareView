@@ -9,11 +9,8 @@ public class Message {
         this.message = message;
     }
 
-    public String getPseudo() {
-        return pseudo;
-    }
-
-    public String getMessage() {
-        return message;
+    @Override
+    public String toString() {
+        return "FROM : " + pseudo + "\n" + message;
     }
 }
