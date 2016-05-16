@@ -22,7 +22,7 @@ public class ShapesManager {
     private boolean finishPolyLine = false;
     private int color = Color.BLACK;
     private int texteSize = 15;
-    private int stokeSize = 15;
+    private int strokeSize = 15;
     private String pseudo;
     private String addressIp;
     private String port;
@@ -99,12 +99,12 @@ public class ShapesManager {
                 return rectangle;
 
             case Shape.LINE:
-                Line line = new Line(x, y, x + width, y + height, color, stokeSize);
+                Line line = new Line(x, y, x + width, y + height, color, strokeSize);
                 sendQueueMessage.execute(addressIp, port, title, pseudo, line.toJSON(indiceTranslationX, indiceTranslationY));
                 return line;
 
             case Shape.POLYLINE:
-                return new Polyline(x, y, color);
+                return new Polyline(x, y, color, strokeSize);
         }
         return null;
     }
@@ -153,7 +153,7 @@ public class ShapesManager {
     }
 
     public void setStokeSize(int size) {
-        stokeSize = size;
+        strokeSize = size;
     }
 
 
@@ -211,6 +211,9 @@ public class ShapesManager {
             JSONObject jsonObject = jsonRootObject.getJSONObject("draw");
             double width;
             double height;
+            int color = Color.BLACK;
+            JSONObject options;
+            double strokeSize = 15;
 
             String forme = jsonObject.getString("shape");
             switch (forme) {
@@ -227,7 +230,15 @@ public class ShapesManager {
                     centerX = Float.parseFloat(centerCoords[0].substring(1)); // On enleve les []
                     centerY = Float.parseFloat(centerCoords[1].substring(0, centerCoords[1].length() - 1));
 
-                    shapes.add(new Ellipse((int) centerX, (int) centerY, (int) width, (int) height, Color.BLACK));
+                    options = jsonObject.optJSONObject("options");
+                    if(options != null){
+                        String colorstr = options.optString("fillColor");
+                        String[] colors = colorstr.substring(1, colorstr.length()-1).split(",");
+                        color = Color.argb(Integer.parseInt(colors[0]), Integer.parseInt(colors[1]), Integer.parseInt(colors[2]), Integer.parseInt(colors[3]));
+
+                    }
+
+                    shapes.add(new Ellipse((int) centerX, (int) centerY, (int) width, (int) height, color));
                     break;
 
 
@@ -240,7 +251,14 @@ public class ShapesManager {
                     height = bottom - top;
                     width = right - left;
 
-                    shapes.add(new Rectangle((int) left, (int) top, (int) width, (int) height, Color.BLACK));
+                    options = jsonObject.optJSONObject("options");
+                    if(options != null){
+                        String colorstr = options.optString("fillColor");
+                        String[] colors = colorstr.substring(1, colorstr.length()-1).split(",");
+                        color = Color.argb(Integer.parseInt(colors[0]), Integer.parseInt(colors[1]), Integer.parseInt(colors[2]), Integer.parseInt(colors[3]));
+                    }
+
+                    shapes.add(new Rectangle((int) left, (int) top, (int) width, (int) height, color));
                     break;
 
 
@@ -255,10 +273,18 @@ public class ShapesManager {
                         float pointX = Float.parseFloat(coordValues[0]);
                         float pointY = Float.parseFloat(coordValues[1]);
 
+                        options = jsonObject.optJSONObject("options");
+                        if(options != null){
+                            String colorstr = options.optString("strokeColor");
+                            String[] colors = colorstr.substring(1, colorstr.length()-1).split(",");
+                            color = Color.argb(Integer.parseInt(colors[0]), Integer.parseInt(colors[1]), Integer.parseInt(colors[2]), Integer.parseInt(colors[3]));
+
+                            strokeSize = options.optDouble("strokeWidth");
+                        }
+
                         if (poly == null) {
-                            poly = new Polyline(pointX, pointY, Color.BLACK);
+                            poly = new Polyline(pointX, pointY, color, (int)strokeSize);
                             shapes.add(poly);
-                            Log.v("SHAPES", String.valueOf(shapes.size()));
                         } else {
                             poly.addPoint((int) pointX, (int) pointY);
                         }
@@ -274,8 +300,15 @@ public class ShapesManager {
                     float x = Float.parseFloat(positionXY[0].substring(1));
                     float y = Float.parseFloat(positionXY[1].substring(0, (positionXY[1]).length() - 1));
                     String text = jsonObject.optString("content");
-                    shapes.add(new Texte((int) x, (int) y, text, Color.BLACK, 15));
-                    Log.v("SHAPES", String.valueOf(shapes.size()));
+                    options = jsonObject.optJSONObject("options");
+                    if(options != null){
+                        String colorstr = options.optString("strokeColor");
+                        String[] colors = colorstr.substring(1, colorstr.length()-1).split(",");
+                        color = Color.argb(Integer.parseInt(colors[0]), Integer.parseInt(colors[1]), Integer.parseInt(colors[2]), Integer.parseInt(colors[3]));
+
+                        strokeSize = options.optDouble("strokeWidth");
+                    }
+                    shapes.add(new Texte((int) x, (int) y, text, color, (int)strokeSize));
                     break;
             }
         } catch (JSONException je) {

@@ -1,6 +1,7 @@
 package shapes;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
@@ -44,8 +45,13 @@ public class Ellipse implements Shape {
 
     @Override
     public String toJSON(int dx, int dy) {
+        float[] colors = new float[3];
+        colors[0] = Color.red(color);
+        colors[1] = Color.green(color);
+        colors[2] = Color.blue(color);
         String str = "";
-        str += "{\\\"draw\\\": { \\\"shape\\\": \\\"ellipse\\\", \\\"center\\\":["+(X-dx)+","+(Y-dy)+"], \\\"radius\\\": ["+width+","+height+"] } }";
+        str += "{\\\"draw\\\": { \\\"shape\\\": \\\"ellipse\\\", \\\"center\\\":["+(X-dx)+","+(Y-dy)+"], \\\"radius\\\": ["+width+","+height+"], \\\"options\\\": {\\\"fillColor\\\": ["+Color.alpha(color)+", "+(int)colors[0]+", "+(int)colors[1]+", "+(int)colors[2]+"] } } }";
+
         return str;
     }
 

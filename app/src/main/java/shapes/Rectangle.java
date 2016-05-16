@@ -1,6 +1,7 @@
 package shapes;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
@@ -44,8 +45,11 @@ public class Rectangle implements Shape {
     @Override
     public String toJSON(int dx, int dy) {
         String str = "";
-
-        str += "{\\\"draw\\\": { \\\"shape\\\": \\\"rectangle\\\", \\\"left\\\":"+(X-dx)+", \\\"top\\\":"+(Y-dy)+",\\\"right\\\":"+(X+width)+",\\\"bottom\\\":"+(Y+height)+"} }";
+        float[] colors = new float[3];
+        colors[0] = Color.red(color);
+        colors[1] = Color.green(color);
+        colors[2] = Color.blue(color);
+        str += "{\\\"draw\\\": { \\\"shape\\\": \\\"rectangle\\\", \\\"left\\\":"+(X-dx)+", \\\"top\\\":"+(Y-dy)+",\\\"right\\\":"+(X+width)+",\\\"bottom\\\":"+(Y+height)+" \\\"options\\\": {\\\"fillColor\\\": ["+ Color.alpha(color)+", "+colors[0]+", "+colors[1]+", "+colors[2]+"] }} }";
         return str;
     }
 
