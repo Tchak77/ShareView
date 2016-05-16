@@ -1,7 +1,5 @@
 package messages;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +32,12 @@ public class MessagesManager {
         return manager;
     }
 
+    public void sendMessage(String message){
+        messages.add(new Message(pseudo, message));
+        SendQueueMessage sendQueueMessage = new SendQueueMessage();
+        sendQueueMessage.execute(addressIp, port, title, pseudo, message);
+    }
+
     public void JSONparser(String pseudo, String jsonstr) {
         if (jsonstr.contains("admin")) {
             if (jsonstr.contains("join")) {
@@ -44,9 +48,9 @@ public class MessagesManager {
                 users.remove(pseudo);
             }
             return;
+        } else {
+            messages.add(new Message(pseudo,jsonstr));
         }
-        Log.v("MESSSAGE", pseudo + " says " + jsonstr);
-
     }
 
     public void informConnection(){

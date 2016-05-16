@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.List;
@@ -37,13 +39,24 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView =  inflater.inflate(R.layout.fragment_chat, container, false);
+        final View rootView =  inflater.inflate(R.layout.fragment_chat, container, false);
 
 
         ListView listView = (ListView)rootView.findViewById(R.id.chatList);
-        ArrayAdapter arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.listitem_chat, R.id.listitem_chat_textview, messages.toArray());
+        final ArrayAdapter arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.listitem_chat, R.id.listitem_chat_textview, messages.toArray());
         listView.setAdapter(arrayAdapter);
 
+        Button send = (Button) rootView.findViewById(R.id.send);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editText = (EditText) rootView.findViewById(R.id.textContent);
+                String str = editText.getText().toString();
+                MessagesManager messagesManager = MessagesManager.getSingleton();
+                messagesManager.sendMessage(str);
+                arrayAdapter.notifyDataSetChanged();
+            }
+        });
 
         return rootView;
 
