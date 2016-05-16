@@ -139,11 +139,6 @@ public class ShapesManager {
         shapes = new ArrayList<>();
     }
 
-
-    public void setBoard(List<Shape> shapes) {
-        this.shapes = shapes;
-    }
-
     public String toJSON() {
         StringBuilder strb = new StringBuilder();
         for (Shape shape : shapes) {

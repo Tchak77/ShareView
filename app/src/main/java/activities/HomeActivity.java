@@ -12,16 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import asyncTasks.GetQueueMessage;
 import asyncTasks.GetQueues;
-import asyncTasks.SendQueueMessage;
-import messages.Message;
 import messages.MessagesManager;
-import shapes.Shape;
 import shapes.ShapesManager;
 
 public class HomeActivity extends AppCompatActivity {
@@ -56,6 +52,7 @@ public class HomeActivity extends AppCompatActivity {
                 if(!input.getText().toString().trim().isEmpty()){
                     pseudo = input.getText().toString().trim();
                     ShapesManager.getSingleton(pseudo);
+                    MessagesManager.getSingleton(pseudo);
                     createMenuView();
                     dialog.dismiss();
                 }
@@ -104,15 +101,23 @@ public class HomeActivity extends AppCompatActivity {
 
 
                             title = input.getText().toString().trim();
-                            SendQueueMessage sendQueueMessage = new SendQueueMessage();
                             address_ip = ipaddress.getText().toString();
                             port = porttxt.getText().toString();
-                            sendQueueMessage.execute(address_ip, port, title, pseudo, "{\\\"admin\\\" : \\\"join\\\"}");
+
+                            MessagesManager messagesManager = MessagesManager.getSingleton();
+                            messagesManager.reintializeManager();
+                            messagesManager.setTitle(title);
+                            messagesManager.setAddressIp(address_ip);
+                            messagesManager.setPort(port);
+                            messagesManager.informConnection();
+
                             ShapesManager manager = ShapesManager.getSingleton();
+                            manager.resetBoard();
                             manager.setTitle(title);
                             manager.setAddressIp(address_ip);
                             manager.setPort(port);
-                            manager.setBoard(new ArrayList<Shape>());
+
+
                             Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                             intent.putExtra("title", title);
                             intent.putExtra("pseudo", pseudo);
@@ -151,15 +156,18 @@ public class HomeActivity extends AppCompatActivity {
 
                                     String boardName = queues.get(position);
                                     MessagesManager messagesManager = MessagesManager.getSingleton();
-                                    messagesManager.setUsers(new ArrayList<String>());
-                                    messagesManager.setMessages(new ArrayList<Message>());
-                                    SendQueueMessage sendQueueMessage = new SendQueueMessage();
-                                    sendQueueMessage.execute(address_ip, port, boardName, pseudo, "{\\\"admin\\\" : \\\"join\\\"}");
+                                    messagesManager.reintializeManager();
+                                    messagesManager.setTitle(boardName);
+                                    messagesManager.setAddressIp(address_ip);
+                                    messagesManager.setPort(port);
+                                    messagesManager.informConnection();
+
                                     ShapesManager manager = ShapesManager.getSingleton();
-                                    manager.setBoard(new ArrayList<Shape>());
+                                    manager.resetBoard();
                                     manager.setTitle(boardName);
                                     manager.setAddressIp(address_ip);
                                     manager.setPort(port);
+
                                     GetQueueMessage getQueueMessage = new GetQueueMessage();
                                     getQueueMessage.execute("http://" + address_ip + ":" + port + "/",boardName);
 

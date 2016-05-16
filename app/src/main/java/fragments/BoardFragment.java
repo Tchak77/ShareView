@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import activities.HomeActivity;
 import activities.MainActivity;
 import activities.R;
+import messages.MessagesManager;
 import shapes.Shape;
 import shapes.ShapesManager;
 
@@ -171,9 +172,13 @@ public class BoardFragment extends Fragment {
         }
 
         if(item.getItemId() == R.id.leaveBoard){
-            //Leave the board
+            MessagesManager messagesManager = MessagesManager.getSingleton();
+            messagesManager.informDeconnection();
+            ShapesManager shapesManager = ShapesManager.getSingleton();
+            shapesManager.resetBoard();
             Intent intent = new Intent(getActivity(), HomeActivity.class);
             startActivity(intent);
+            return true;
         }
 
         return true;
