@@ -1,5 +1,6 @@
 package asyncTasks;
 
+import android.graphics.Canvas;
 import android.os.AsyncTask;
 
 import org.json.JSONException;
@@ -51,6 +52,10 @@ public class GetQueueMessage extends AsyncTask<String, Void, Void> {
                 message = jsonRootObject.getString("message");
                 if(message.contains("draw")){
                     shapesManager.JSONparser(message);
+                    Canvas canvas = shapesManager.getCanvas();
+                    if(canvas!=null){
+                        shapesManager.drawShapes(canvas);
+                    }
                 } else {
                     String pseudo = jsonRootObject.getString("author");
                     messagesManager.JSONparser(pseudo, message);

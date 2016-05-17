@@ -27,7 +27,7 @@ public class ShapesManager {
     private String addressIp;
     private String port;
     private String title;
-
+    private Canvas canvas;
     private int indiceTranslationX = 0;
     private int indiceTranslationY = 0;
 
@@ -76,6 +76,7 @@ public class ShapesManager {
     }
 
     public void drawShapes(Canvas canvas) {
+        this.canvas = canvas;
         for (Shape shape : shapes) {
             shape.draw(canvas);
         }
@@ -327,5 +328,9 @@ public class ShapesManager {
 
     public void setAddressIp(String addressIp) {
         this.addressIp = addressIp;
+    }
+
+    public Canvas getCanvas(){
+        return canvas;
     }
 }
