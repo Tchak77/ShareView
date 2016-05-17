@@ -1,7 +1,7 @@
 package asyncTasks;
 
-import android.graphics.Canvas;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,13 +28,16 @@ public class GetQueueMessage extends AsyncTask<String, Void, Void> {
         ShapesManager shapesManager = ShapesManager.getSingleton();
         MessagesManager messagesManager = MessagesManager.getSingleton();
         try {
-            do{
-                URL url = new URL(params[0]+params[1]+"/"+i+"?timeout="+timeout);
+            do {
+                URL url = new URL(params[0] + params[1] + "/" + i + "?timeout=" + timeout);
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();
-                if (urlConnection.getResponseCode()!=HttpURLConnection.HTTP_OK){
-                    break;
+                if (urlConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                    if(timeout<=10){
+                        timeout++;
+                    }
+                    continue;
                 }
                 InputStream inputStream = urlConnection.getInputStream();
                 if (inputStream == null) {
@@ -44,26 +47,22 @@ public class GetQueueMessage extends AsyncTask<String, Void, Void> {
                 reader = new BufferedReader(new InputStreamReader(inputStream));
 
                 String line = reader.readLine();
-                if(line == null){
+                if (line == null) {
                     return null;
                 }
 
                 JSONObject jsonRootObject = new JSONObject(line);
                 message = jsonRootObject.getString("message");
-                if(message.contains("draw")){
+                if (message.contains("draw")) {
                     shapesManager.JSONparser(message);
-                    Canvas canvas = shapesManager.getCanvas();
-                    if(canvas!=null){
-                        shapesManager.drawShapes(canvas);
-                    }
                 } else {
                     String pseudo = jsonRootObject.getString("author");
                     messagesManager.JSONparser(pseudo, message);
                 }
-                if(message!=null){
-                    i++;
-                }
-            }while(true);
+                publishProgress();
+                i++;
+                timeout = 1;
+            } while (true);
 
 
         } catch (IOException e) {
@@ -72,5 +71,10 @@ public class GetQueueMessage extends AsyncTask<String, Void, Void> {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    protected void onProgressUpdate(Void... values) {
+        Log.v("TEST","AHAHA");
     }
 }
