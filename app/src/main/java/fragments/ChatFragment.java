@@ -20,9 +20,9 @@ import messages.MessagesManager;
 
 
 public class ChatFragment extends Fragment {
-
     private OnFragmentInteractionListener mListener;
     private List<Message> messages;
+    private ArrayAdapter<Message> arrayAdapter;
 
     public ChatFragment() {
         // Required empty public constructor
@@ -32,7 +32,7 @@ public class ChatFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MessagesManager manager = MessagesManager.getSingleton();
+        MessagesManager manager = MessagesManager.getSingleton(this);
         messages = manager.getMessages();
     }
 
@@ -43,7 +43,7 @@ public class ChatFragment extends Fragment {
 
 
         ListView listView = (ListView)rootView.findViewById(R.id.chatList);
-        final ArrayAdapter<Message> arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.listitem_chat, R.id.listitem_chat_textview, messages);
+        arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.listitem_chat, R.id.listitem_chat_textview, messages);
         listView.setAdapter(arrayAdapter);
 
         Button send = (Button) rootView.findViewById(R.id.send);
@@ -53,7 +53,6 @@ public class ChatFragment extends Fragment {
                 EditText editText = (EditText) rootView.findViewById(R.id.textContent);
                 String str = editText.getText().toString();
                 MessagesManager messagesManager = MessagesManager.getSingleton();
-                messagesManager.setMessageAdapter(arrayAdapter);
                 messagesManager.sendMessage(str);
             }
         });
@@ -82,6 +81,15 @@ public class ChatFragment extends Fragment {
 
     public interface OnFragmentInteractionListener {
 
+    }
+
+    public void update(){
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                arrayAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
 }

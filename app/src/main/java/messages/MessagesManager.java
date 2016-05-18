@@ -1,11 +1,11 @@
 package messages;
 
-import android.widget.ArrayAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import asyncTasks.SendQueueMessage;
+import fragments.ChatFragment;
+import fragments.UsersFragment;
 
 public class MessagesManager {
     private static MessagesManager manager;
@@ -15,8 +15,8 @@ public class MessagesManager {
     private String addressIp;
     private String port;
     private String title;
-    private ArrayAdapter<Message> messageArrayAdapter;
-    private ArrayAdapter<String> userArrayAdapter;
+    private ChatFragment chatFragment;
+    private UsersFragment usersFragment;
 
     private MessagesManager() {
         messages = new ArrayList<>();
@@ -36,12 +36,22 @@ public class MessagesManager {
         return manager;
     }
 
+    public static MessagesManager getSingleton(ChatFragment chatFragment) {
+        getSingleton();
+        manager.chatFragment = chatFragment;
+        return manager;
+    }
+
+    public static MessagesManager getSingleton(UsersFragment usersFragment) {
+        getSingleton();
+        manager.usersFragment = usersFragment;
+        return manager;
+    }
+
     public void sendMessage(String messageStr) {
         Message message = new Message(pseudo, messageStr);
         messages.add(message);
-        if (messageArrayAdapter != null) {
-            messageArrayAdapter.notifyDataSetChanged();
-        }
+        chatFragment.update();
         SendQueueMessage sendQueueMessage = new SendQueueMessage();
         sendQueueMessage.execute(addressIp, port, title, pseudo, messageStr);
     }
@@ -51,21 +61,21 @@ public class MessagesManager {
             if (jsonstr.contains("join")) {
                 if (!users.contains(pseudo)) {
                     users.add(pseudo);
-                    if (userArrayAdapter != null) {
-                        userArrayAdapter.notifyDataSetChanged();
+                    if(usersFragment!=null){
+                        usersFragment.update();
                     }
                 }
             } else {
                 users.remove(pseudo);
-                if (userArrayAdapter != null) {
-                    userArrayAdapter.notifyDataSetChanged();
+                if(usersFragment!=null){
+                    usersFragment.update();
                 }
             }
             return;
         } else {
             messages.add(new Message(pseudo, jsonstr));
-            if (messageArrayAdapter != null) {
-                messageArrayAdapter.notifyDataSetChanged();
+            if(chatFragment!=null){
+                chatFragment.update();
             }
         }
     }
@@ -94,15 +104,6 @@ public class MessagesManager {
     public List<String> getUsers() {
         return users;
     }
-
-    public void setUserAdapter(ArrayAdapter<String> userArrayAdapter){
-        this.userArrayAdapter = userArrayAdapter;
-    }
-
-    public void setMessageAdapter(ArrayAdapter<Message> messageArrayAdapter){
-        this.messageArrayAdapter = messageArrayAdapter;
-    }
-
 
     public void setTitle(String title) {
         this.title = title;

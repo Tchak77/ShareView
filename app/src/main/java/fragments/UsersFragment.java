@@ -20,6 +20,7 @@ public class UsersFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private List<String> users;
+    private ArrayAdapter<String> arrayAdapter;
 
     public UsersFragment() {
         // Required empty public constructor
@@ -29,8 +30,8 @@ public class UsersFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MessagesManager manager = MessagesManager.getSingleton();
-        users= manager.getUsers();
+        MessagesManager manager = MessagesManager.getSingleton(this);
+        users = manager.getUsers();
     }
 
     @Override
@@ -38,14 +39,12 @@ public class UsersFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_user, container, false);
 
-        ListView listView = (ListView)rootView.findViewById(R.id.listView);
-        ArrayAdapter arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.listitem_user, R.id.listitem_user_textview, users.toArray());
+        ListView listView = (ListView) rootView.findViewById(R.id.listView);
+        arrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.listitem_user, R.id.listitem_user_textview, users);
         listView.setAdapter(arrayAdapter);
-        MessagesManager.getSingleton().setUserAdapter(arrayAdapter);
 
         return rootView;
     }
-
 
 
     @Override
@@ -66,9 +65,17 @@ public class UsersFragment extends Fragment {
     }
 
 
-
     public interface OnFragmentInteractionListener {
 
+    }
+
+    public void update() {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                arrayAdapter.notifyDataSetChanged();
+            }
+        });
     }
 }
 
