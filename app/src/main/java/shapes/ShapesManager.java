@@ -3,6 +3,7 @@ package shapes;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.util.Log;
+import android.view.View;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import asyncTasks.SendQueueMessage;
+import views.SheetView;
 
 
 public class ShapesManager {
@@ -27,7 +29,7 @@ public class ShapesManager {
     private String addressIp;
     private String port;
     private String title;
-    private Canvas canvas;
+    private SheetView view;
     private int indiceTranslationX = 0;
     private int indiceTranslationY = 0;
 
@@ -48,6 +50,12 @@ public class ShapesManager {
     public static ShapesManager getSingleton(String pseudo) {
         getSingleton();
         manager.pseudo = pseudo;
+        return manager;
+    }
+
+    public static ShapesManager getSingleton(SheetView view) {
+        getSingleton();
+        manager.view = view;
         return manager;
     }
 
@@ -76,7 +84,6 @@ public class ShapesManager {
     }
 
     public void drawShapes(Canvas canvas) {
-        this.canvas = canvas;
         for (Shape shape : shapes) {
             shape.draw(canvas);
         }
@@ -311,7 +318,9 @@ public class ShapesManager {
                     }
                     shapes.add(new Texte((int) x, (int) y, text, color, (int)strokeSize));
                     break;
+
             }
+            view.invalidateView();
         } catch (JSONException je) {
             je.printStackTrace();
         }
@@ -328,9 +337,5 @@ public class ShapesManager {
 
     public void setAddressIp(String addressIp) {
         this.addressIp = addressIp;
-    }
-
-    public Canvas getCanvas(){
-        return canvas;
     }
 }

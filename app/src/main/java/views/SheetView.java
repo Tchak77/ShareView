@@ -1,6 +1,7 @@
 package views;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Canvas;
@@ -16,7 +17,7 @@ import shapes.ShapesManager;
 
 public class SheetView extends View {
 
-    private ShapesManager shapesManager = ShapesManager.getSingleton();
+    private ShapesManager shapesManager = ShapesManager.getSingleton(this);
 
     private float upperLeftX = -1;
     private float upperLeftY = -1;
@@ -136,6 +137,15 @@ public class SheetView extends View {
         canvas.save();
         shapesManager.drawShapes(canvas);
         canvas.restore();
+    }
+
+    public void invalidateView(){
+        ((Activity)getContext()).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                invalidate();
+            }
+        });
     }
 
 }

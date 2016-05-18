@@ -1,5 +1,6 @@
 package asyncTasks;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -13,11 +14,12 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import activities.MainActivity;
 import messages.MessagesManager;
 import shapes.ShapesManager;
 
 public class GetQueueMessage extends AsyncTask<String, Void, Void> {
-
+    
     @Override
     protected Void doInBackground(String... params) {
         HttpURLConnection urlConnection = null;
@@ -59,7 +61,6 @@ public class GetQueueMessage extends AsyncTask<String, Void, Void> {
                     String pseudo = jsonRootObject.getString("author");
                     messagesManager.JSONparser(pseudo, message);
                 }
-                publishProgress();
                 i++;
                 timeout = 1;
             } while (true);
@@ -71,10 +72,5 @@ public class GetQueueMessage extends AsyncTask<String, Void, Void> {
             e.printStackTrace();
         }
         return null;
-    }
-
-    @Override
-    protected void onProgressUpdate(Void... values) {
-        Log.v("TEST","AHAHA");
     }
 }
