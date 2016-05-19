@@ -1,5 +1,7 @@
 package messages;
 
+import android.os.AsyncTask;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +55,7 @@ public class MessagesManager {
         messages.add(message);
         chatFragment.update();
         SendQueueMessage sendQueueMessage = new SendQueueMessage();
-        sendQueueMessage.execute(addressIp, port, title, pseudo, messageStr);
+        sendQueueMessage.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,addressIp, port, title, pseudo, messageStr);
     }
 
     public void JSONparser(String pseudo, String jsonstr) {
@@ -82,12 +84,12 @@ public class MessagesManager {
 
     public void informConnection() {
         SendQueueMessage sendQueueMessage = new SendQueueMessage();
-        sendQueueMessage.execute(addressIp, port, title, pseudo, "{\\\"admin\\\" : \\\"join\\\"}");
+        sendQueueMessage.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,addressIp, port, title, pseudo, "{\\\"admin\\\" : \\\"join\\\"}");
     }
 
     public void informDeconnection() {
         SendQueueMessage sendQueueMessage = new SendQueueMessage();
-        sendQueueMessage.execute(addressIp, port, title, pseudo, "{\\\"admin\\\" : \\\"leave\\\"}");
+        sendQueueMessage.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,addressIp, port, title, pseudo, "{\\\"admin\\\" : \\\"leave\\\"}");
         users = new ArrayList<String>();
         messages = new ArrayList<Message>();
     }

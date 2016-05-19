@@ -2,8 +2,7 @@ package shapes;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.util.Log;
-import android.view.View;
+import android.os.AsyncTask;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -98,17 +97,17 @@ public class ShapesManager {
         switch (current) {
             case Shape.ELLIPSE:
                 Ellipse ellipse = new Ellipse(x, y, width, height, color);
-                sendQueueMessage.execute(addressIp, port, title, pseudo, ellipse.toJSON(indiceTranslationX, indiceTranslationY));
+                sendQueueMessage.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,addressIp, port, title, pseudo, ellipse.toJSON(indiceTranslationX, indiceTranslationY));
                 return ellipse;
 
             case Shape.RECTANGLE:
                 Rectangle rectangle = new Rectangle(x, y, width, height, color);
-                sendQueueMessage.execute(addressIp, port, title, pseudo, rectangle.toJSON(indiceTranslationX, indiceTranslationY));
+                sendQueueMessage.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,addressIp, port, title, pseudo, rectangle.toJSON(indiceTranslationX, indiceTranslationY));
                 return rectangle;
 
             case Shape.LINE:
                 Line line = new Line(x, y, x + width, y + height, color, strokeSize);
-                sendQueueMessage.execute(addressIp, port, title, pseudo, line.toJSON(indiceTranslationX, indiceTranslationY));
+                sendQueueMessage.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,addressIp, port, title, pseudo, line.toJSON(indiceTranslationX, indiceTranslationY));
                 return line;
 
             case Shape.POLYLINE:
@@ -119,7 +118,7 @@ public class ShapesManager {
 
     public void sendPolylineShape(Polyline polyline){
         SendQueueMessage sendQueueMessage = new SendQueueMessage();
-        sendQueueMessage.execute(addressIp, port, title, pseudo, polyline.toJSON(indiceTranslationX, indiceTranslationY));
+        sendQueueMessage.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,addressIp, port, title, pseudo, polyline.toJSON(indiceTranslationX, indiceTranslationY));
     }
 
     public Shape getLastShape() {
@@ -132,7 +131,7 @@ public class ShapesManager {
     public Texte createTexte(int x, int y, String texte) {
         SendQueueMessage sendQueueMessage = new SendQueueMessage();
         Texte text = new Texte(x, y, texte, color, texteSize);
-        sendQueueMessage.execute(addressIp, port, title, pseudo, text.toJSON(indiceTranslationX, indiceTranslationY));
+        sendQueueMessage.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,addressIp, port, title, pseudo, text.toJSON(indiceTranslationX, indiceTranslationY));
         return text;
     }
 

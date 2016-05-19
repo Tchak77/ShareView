@@ -2,6 +2,7 @@ package activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -169,7 +170,7 @@ public class HomeActivity extends AppCompatActivity {
                                     manager.setPort(port);
 
                                     GetQueueMessage getQueueMessage = new GetQueueMessage();
-                                    getQueueMessage.execute("http://" + address_ip + ":" + port + "/",boardName);
+                                    getQueueMessage.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,"http://" + address_ip + ":" + port + "/",boardName);
 
                                     Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                                     intent.putExtra("title", boardName);
