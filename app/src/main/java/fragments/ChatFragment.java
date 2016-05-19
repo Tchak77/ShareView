@@ -87,8 +87,7 @@ public class ChatFragment extends Fragment {
         if (getActivity()!=null) {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
-                public void run() {
-                    arrayAdapter.notifyDataSetChanged();
+                public void run() {arrayAdapter.notifyDataSetChanged();
                 }
             });
         }

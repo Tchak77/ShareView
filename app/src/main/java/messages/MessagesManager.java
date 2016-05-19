@@ -51,9 +51,6 @@ public class MessagesManager {
     }
 
     public void sendMessage(String messageStr) {
-        Message message = new Message(pseudo, messageStr);
-        messages.add(message);
-        chatFragment.update();
         SendQueueMessage sendQueueMessage = new SendQueueMessage();
         sendQueueMessage.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,addressIp, port, title, pseudo, messageStr);
     }
