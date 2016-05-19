@@ -137,7 +137,7 @@ public class ShapesManager {
 
     public void setColor(int color) {
         this.color = color;
-        if (isPolyLine()) {
+        if (isPolyLine() && getLastShape() instanceof Polyline) {
             ((Polyline) getLastShape()).setColor(color);
         }
     }
