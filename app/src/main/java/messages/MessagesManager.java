@@ -96,6 +96,8 @@ public class MessagesManager {
         this.messages = new ArrayList<>();
     }
 
+
+
     public List<Message> getMessages() {
         return messages;
     }

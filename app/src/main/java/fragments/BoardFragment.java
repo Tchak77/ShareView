@@ -15,6 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import activities.HomeActivity;
 import activities.MainActivity;
 import activities.R;
@@ -27,6 +30,7 @@ public class BoardFragment extends Fragment {
 
     private String title;
     private OnFragmentInteractionListener mListener;
+    private ShapesManager shapesManager = ShapesManager.getSingleton();
 
     public BoardFragment() {
     }
@@ -165,11 +169,6 @@ public class BoardFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.reset){
-            ShapesManager.getSingleton().resetBoard();
-            getActivity().findViewById(R.id.sheetView).invalidate();
-            return true;
-        }
 
         if(item.getItemId() == R.id.leaveBoard){
             MessagesManager messagesManager = MessagesManager.getSingleton();
@@ -179,6 +178,28 @@ public class BoardFragment extends Fragment {
             Intent intent = new Intent(getActivity(), HomeActivity.class);
             startActivity(intent);
             return true;
+        }
+
+        if(item.getItemId() == R.id.share){
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, shapesManager.toJSON());
+            sendIntent.setType("text/plain");
+            startActivity(sendIntent);
+
+            return true;
+        }
+
+        if(item.getItemId() == R.id.export){
+        Intent saveIntent = new Intent();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy_HH-mm-ss");
+            saveIntent.setAction(Intent.ACTION_CREATE_DOCUMENT);
+            saveIntent.setType("text/plain");
+            saveIntent.putExtra(Intent.EXTRA_TITLE, "Board"+title+" "+sdf.format(new Date()));
+            saveIntent.putExtra(Intent.EXTRA_TEXT, shapesManager.toJSON());
+            startActivity(saveIntent);
+            return true;
+
         }
 
         return true;

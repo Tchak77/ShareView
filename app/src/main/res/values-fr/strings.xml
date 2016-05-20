@@ -13,8 +13,12 @@
     <string name="ipaddress">Adresse IP du serveur: </string>
     <string name="port">Port: </string>
     <string name="submit">Valider</string>
-    <string name="options">Options de connexion</string>
     <string name="send">Envoyer</string>
     <string name="defaulttext">Entrez votre texte ici</string>
     <string name="leaveBoard">Quitter le tableau</string>
+    <string name="export">Exporter</string>
+    <string name="previous">Voir états précédents</string>
+    <string name="share">Partager</string>
+    <string name="app_name" translatable="false"></string>
+    <string name="enablePrevious">Activer les états précédents: </string>
 </resources>

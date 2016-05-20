@@ -8,8 +8,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
+import android.widget.Switch;
 
 import activities.R;
 import shapes.ShapesManager;
@@ -110,6 +112,42 @@ public class OptionsFragment extends Fragment {
             public boolean onTouch(View v, MotionEvent event) {
                 shapesManager.setColor(Color.BLACK);
                 return true;
+            }
+        });
+
+
+        final SeekBar previous = (SeekBar) rootView.findViewById(R.id.previousBar);
+        final Switch enablePrevious = (Switch) rootView.findViewById(R.id.enablePrevious);
+        previous.setMax(shapesManager.getSize());
+
+       enablePrevious.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+           @Override
+           public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+               if(isChecked){
+                   shapesManager.displayUnderLimit(previous.getProgress());
+               } else {
+                   shapesManager.displayUnderLimit(-1);
+               }
+           }
+       });
+
+
+        previous.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if(enablePrevious.isChecked()) {
+                    shapesManager.displayUnderLimit(progress);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
             }
         });
 

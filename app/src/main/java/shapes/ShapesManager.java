@@ -31,6 +31,7 @@ public class ShapesManager {
     private SheetView view;
     private int indiceTranslationX = 0;
     private int indiceTranslationY = 0;
+    private int limitPrevious = -1;
 
 
     private ShapesManager() {
@@ -83,8 +84,14 @@ public class ShapesManager {
     }
 
     public void drawShapes(Canvas canvas) {
-        for (Shape shape : shapes) {
-            shape.draw(canvas);
+        if(limitPrevious != -1){
+            for(int i=0; i<limitPrevious; i++){
+                shapes.get(i).draw(canvas);
+            }
+        } else {
+            for(Shape shape: shapes){
+                shape.draw(canvas);
+            }
         }
     }
 
@@ -210,8 +217,10 @@ public class ShapesManager {
         return false;
     }
 
+    public void displayUnderLimit(int limit){
+        limitPrevious = limit;
+    }
 
-    //TODO gestion des options
     public void JSONparser(String jsonstr) {
         try {
             JSONObject jsonRootObject = new JSONObject(jsonstr);
@@ -326,6 +335,7 @@ public class ShapesManager {
 
     }
 
+    public int getSize(){ return shapes.size(); }
     public void setTitle(String title) {
         this.title = title;
     }

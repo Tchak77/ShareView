@@ -81,4 +81,23 @@
 
     </LinearLayout>
 
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enablePrevious"
+        android:id="@+id/enablePrevious"
+        android:checked="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/previous"
+        android:paddingTop="30dp" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/previousBar"
+        android:indeterminate="false" />
+
 </LinearLayout>
