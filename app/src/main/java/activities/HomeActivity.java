@@ -118,6 +118,8 @@ public class HomeActivity extends AppCompatActivity {
                             manager.setAddressIp(address_ip);
                             manager.setPort(port);
 
+                            GetQueueMessage getQueueMessage = new GetQueueMessage();
+                            getQueueMessage.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,"http://" + address_ip + ":" + port + "/",title);
 
                             Intent intent = new Intent(HomeActivity.this, MainActivity.class);
                             intent.putExtra("title", title);

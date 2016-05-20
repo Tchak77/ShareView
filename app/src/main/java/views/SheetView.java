@@ -140,12 +140,14 @@ public class SheetView extends View {
     }
 
     public void invalidateView(){
-        ((Activity)getContext()).runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                invalidate();
-            }
-        });
+        if (getContext() != null) {
+            ((Activity) getContext()).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    invalidate();
+                }
+            });
+        }
     }
 
 }
