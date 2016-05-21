@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -32,6 +34,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Log.v("toto","created");
+
         AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
         builder.setTitle(R.string.pseudo);
         final EditText input = new EditText(HomeActivity.this);
@@ -46,6 +50,7 @@ public class HomeActivity extends AppCompatActivity {
         builder.setView(input);
         final AlertDialog dialog = builder.create();
         dialog.show();
+
 
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +71,6 @@ public class HomeActivity extends AppCompatActivity {
 
         Button newBoardBtn = (Button) findViewById(R.id.newBoardBtn);
         Button joinBoardBtn = (Button) findViewById(R.id.joinBoardBtn);
-
 
         if(newBoardBtn != null){
             newBoardBtn.setOnClickListener(new View.OnClickListener() {
@@ -180,6 +184,19 @@ public class HomeActivity extends AppCompatActivity {
                                     startActivity(intent);
                                 }
                             });
+
+
+                            Button back = (Button)findViewById(R.id.back);
+                            if(back != null) {
+                                back.setOnTouchListener(new View.OnTouchListener() {
+                                    @Override
+                                    public boolean onTouch(View v, MotionEvent event) {
+                                        startActivity(getIntent());
+                                        finish();
+                                        return false;
+                                    }
+                                });
+                            }
                         }
                     } catch (InterruptedException e) {
                         e.printStackTrace();

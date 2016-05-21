@@ -15,6 +15,8 @@
     <string name="joinBoard">Join existing Board</string>
     <string name="pseudo" translatable="false">Pseudo</string>
 
+    <string name="back">Back</string>
+
 
     <string name="ipaddress">Server IP address: </string>
     <string name="port">Port: </string>
