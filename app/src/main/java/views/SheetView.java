@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -53,13 +54,14 @@ public class SheetView extends View {
 
 
         if(shapesManager.isPolyLine()){
-            lastShapePolyLine = true;
+
             if(action == MotionEvent.ACTION_DOWN){
 
-                if(shapesManager.getLastShape() != null && shapesManager.getLastShape() instanceof Polyline && ((Polyline) shapesManager.getLastShape()).getPoint() != null ){
+                if(lastShapePolyLine && shapesManager.getLastShape() != null && shapesManager.getLastShape() instanceof Polyline && ((Polyline) shapesManager.getLastShape()).getPoint() != null ){
                     upperLeftX = ((Polyline) shapesManager.getLastShape()).getPoint().getX();
                     upperLeftY = ((Polyline) shapesManager.getLastShape()).getPoint().getY();
                 }
+                lastShapePolyLine = true;
                 if(upperLeftX == -1){
 
                     upperLeftX = event.getX();
@@ -94,6 +96,7 @@ public class SheetView extends View {
                         setTextOnBoard(event);
 
                     } else {
+                        Log.v("toto","created");
                         shapesManager.addShape(shapesManager.createShape((int) upperLeftX, (int) upperLeftY, (int) (event.getX() - upperLeftX), (int) (event.getY() - upperLeftY)));
                     }
                     upperLeftY = -1;
