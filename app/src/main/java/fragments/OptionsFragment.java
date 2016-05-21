@@ -85,6 +85,7 @@ public class OptionsFragment extends Fragment {
         final ImageButton rouge = (ImageButton) rootView.findViewById(R.id.rouge);
         final ImageButton vert = (ImageButton) rootView.findViewById(R.id.vert);
         final ImageButton noir = (ImageButton) rootView.findViewById(R.id.noir);
+        final ImageButton blanc = (ImageButton) rootView.findViewById(R.id.blanc);
 
         bleu.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -111,6 +112,13 @@ public class OptionsFragment extends Fragment {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 shapesManager.setColor(Color.BLACK);
+                return true;
+            }
+        });
+        blanc.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                shapesManager.setColor(Color.WHITE);
                 return true;
             }
         });

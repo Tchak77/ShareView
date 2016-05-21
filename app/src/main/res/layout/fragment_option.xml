@@ -73,10 +73,17 @@
             android:clickable="true"/>
 
         <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="25dp"
+        android:id="@+id/noir"
+        android:background="@drawable/noir"
+        android:clickable="true"/>
+
+        <ImageButton
             android:layout_width="50dp"
             android:layout_height="25dp"
-            android:id="@+id/noir"
-            android:background="@drawable/noir"
+            android:id="@+id/blanc"
+            android:background="@drawable/blanc"
             android:clickable="true"/>
 
     </LinearLayout>
