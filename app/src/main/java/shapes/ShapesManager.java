@@ -328,7 +328,9 @@ public class ShapesManager {
                     break;
 
             }
-            view.invalidateView();
+            if(view!=null){
+                view.invalidateView();
+            }
         } catch (JSONException je) {
             je.printStackTrace();
         }

@@ -70,12 +70,14 @@ public class UsersFragment extends Fragment {
     }
 
     public void update() {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                arrayAdapter.notifyDataSetChanged();
-            }
-        });
+        if(getActivity()!=null){
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    arrayAdapter.notifyDataSetChanged();
+                }
+            });
+        }
     }
 }
 
