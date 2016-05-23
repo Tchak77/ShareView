@@ -26,17 +26,19 @@ public class OptionsFragment extends Fragment {
         // Required empty public constructor
     }
 
-
-    public static OptionsFragment newInstance() {
-        OptionsFragment fragment = new OptionsFragment();
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+
+    /**
+     * Prepare the layout and set listeners to modify the options of the board
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -65,7 +67,7 @@ public class OptionsFragment extends Fragment {
         strokeSizeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                shapesManager.setStokeSize(progress);
+                shapesManager.setStrokeSize(progress);
             }
 
             @Override

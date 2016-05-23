@@ -36,11 +36,15 @@ public class ShapesManager {
 
 
     private ShapesManager() {
-
         shapes = new ArrayList<>();
         current = 1;
     }
 
+
+    /**
+     * Creates an unique ShapeManager
+     * @return an unique ShapeManager
+     */
     public static ShapesManager getSingleton() {
         if (manager == null) {
             manager = new ShapesManager();
@@ -48,42 +52,60 @@ public class ShapesManager {
         return manager;
     }
 
-    public static ShapesManager getSingleton(String pseudo) {
-        getSingleton();
-        manager.pseudo = pseudo;
-        return manager;
+
+    /**
+     * Set a view in the manager
+     * @param view
+     */
+    public void setView(SheetView view) {
+        this.view = view;
     }
 
-    public static ShapesManager getSingleton(SheetView view) {
-        getSingleton();
-        manager.view = view;
-        return manager;
+    /**
+     * Set a pseudo in the manager
+     * @param pseudo
+     */
+    public void setPseudo(String pseudo){
+        this.pseudo = pseudo;
     }
 
-    public void addShape(Shape p) {
-        shapes.add(p);
-    }
-
+    /**
+     * Tell if the current Shape is a polyline
+     * @return True if the current shape is a Polyline, false otherwise
+     */
     public boolean isPolyLine() {
         return current == Shape.POLYLINE;
     }
 
+    /**
+     * Tell if the current Shape is a text
+     * @return True if the current shape is a text, false otherwise
+     */
     public boolean isTexte() {
         return current == Shape.TEXTE;
     }
 
+    /**
+     * Tell if the current Shape is a rectangle
+     * @return True if the current shape is a Rectangle, false otherwise
+     */
     public boolean isRectangle() {
         return current == Shape.RECTANGLE;
     }
 
+    /**
+     * Tell if the current Shape is an Ellipse
+     * @return True if the current shape is an Ellipse, false otherwise
+     */
     public boolean isEllipse() {
         return current == Shape.ELLIPSE;
     }
 
-    public boolean isLine() {
-        return current == Shape.LINE;
-    }
 
+    /**
+     * Draw all the shapes in the list or draw the shapes under the limit defined in the option fragment
+     * @param canvas
+     */
     public void drawShapes(Canvas canvas) {
         if(limitPrevious != -1){
             for(int i=0; i<limitPrevious; i++){
@@ -96,10 +118,24 @@ public class ShapesManager {
         }
     }
 
+
+    /**
+     * Change the current Shape
+     * @param current
+     */
     public void setCurrentShape(int current) {
         this.current = current;
     }
 
+
+    /**
+     * Creates a new Shape depending of the current shape excepts Text and send it to the server
+     * @param x Coordinates of the left side of the shape
+     * @param y Coordiantes of the top side of the shape
+     * @param width Width of the shape
+     * @param height Height of the shape
+     * @return the Shape created
+     */
     public Shape createShape(int x, int y, int width, int height) {
         SendQueueMessage sendQueueMessage = new SendQueueMessage();
         switch (current) {
@@ -124,11 +160,21 @@ public class ShapesManager {
         return null;
     }
 
+
+    /**
+     * Send the Polyline to the server once it's complete
+     * @param polyline The polyline to send to the server
+     */
     public void sendPolylineShape(Polyline polyline){
         SendQueueMessage sendQueueMessage = new SendQueueMessage();
         sendQueueMessage.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,addressIp, port, title, pseudo, polyline.toJSON(indiceTranslationX, indiceTranslationY));
     }
 
+
+    /**
+     * Return the last Shape created
+     * @return the last Shape created
+     */
     public Shape getLastShape() {
         if (shapes.size() > 0) {
             return shapes.get(shapes.size() - 1);
@@ -136,6 +182,14 @@ public class ShapesManager {
         return null;
     }
 
+
+    /**
+     * Creates a new text and send it to the server
+     * @param x value of the left coordinates of the text
+     * @param y value of the top coordinates of the text
+     * @param texte String to print
+     * @return the text created
+     */
     public Texte createTexte(int x, int y, String texte) {
         SendQueueMessage sendQueueMessage = new SendQueueMessage();
         Texte text = new Texte(x, y, texte, color, texteSize);
@@ -143,6 +197,11 @@ public class ShapesManager {
         return text;
     }
 
+
+    /**
+     * Change the current color of the Shapes
+     * @param color
+     */
     public void setColor(int color) {
         this.color = color;
         if (isPolyLine() && getLastShape() instanceof Polyline) {
@@ -150,10 +209,18 @@ public class ShapesManager {
         }
     }
 
+    /**
+     * Empty the list of shapes
+     */
     public void resetBoard() {
         shapes = new ArrayList<>();
     }
 
+
+    /**
+     * Creates a String in a JSON format witch contains all the Shapes
+     * @return the String in a JSON format
+     */
     public String toJSON() {
         StringBuilder strb = new StringBuilder();
         for (Shape shape : shapes) {
@@ -162,16 +229,27 @@ public class ShapesManager {
         return strb.toString();
     }
 
-
+    /**
+     * Change the size of the font
+     * @param size
+     */
     public void setFontSize(int size) {
         texteSize = size;
     }
 
-    public void setStokeSize(int size) {
+    /**
+     * Change the size of the Stroke
+     * @param size
+     */
+    public void setStrokeSize(int size) {
         strokeSize = size;
     }
 
-
+    /**
+     * Move all the shapes in the board
+     * @param dx Value of the translation on X axis
+     * @param dy Value of the translation on Y axis
+     */
     public void translate(int dx, int dy) {
         indiceTranslationX += dx;
         indiceTranslationY += dy;
@@ -181,47 +259,19 @@ public class ShapesManager {
         }
     }
 
-
-    public boolean hasShapeOnTop() {
-        for (Shape shape : shapes) {
-            if (shape.getX() < 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean hasShapeOnBottom(int bottom) {
-        for (Shape shape : shapes) {
-            if (shape.getX() > bottom) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean hasShapeOnLeft() {
-        for (Shape shape : shapes) {
-            if (shape.getY() < 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean hasShapeOnRight(int right) {
-        for (Shape shape : shapes) {
-            if (shape.getY() > right) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    /**
+     * Limits the number of shapes which will be displayed
+     * @param limit
+     */
     public void displayUnderLimit(int limit){
         limitPrevious = limit;
     }
 
+
+    /**
+     * Creates a Shape from a Message
+     * @param jsonstr String in a JSON format which contains a Shape
+     */
     public void JSONparser(String jsonstr) {
         try {
             JSONObject jsonRootObject = new JSONObject(jsonstr);
@@ -363,29 +413,49 @@ public class ShapesManager {
 
     }
 
+
+    /**
+     * Change the border's size of the new Shapes
+     * @param size
+     */
     public void setBorderSize(int size){
         this.borderSize = size;
     }
+
+    /**
+     * Change the border's color of the new Shapes
+     * @param color
+     */
     public void setBorderColor(int color){
         this.borderColor = color;
     }
 
-    public int getBorderSize(){
-        return borderSize;
-    }
-    public int getBorderColor(){
-        return borderColor;
-    }
-
+    /**
+     * Return the number of shapes recorded in the manager
+     * @return number of shapes recorded
+     */
     public int getSize(){ return shapes.size(); }
+
+    /**
+     * Set the title of the Board
+     * @param title
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /**
+     * Set the port of the server
+     * @param port
+     */
     public void setPort(String port) {
         this.port = port;
     }
 
+    /**
+     * Set the IP address of the server
+     * @param addressIp
+     */
     public void setAddressIp(String addressIp) {
         this.addressIp = addressIp;
     }

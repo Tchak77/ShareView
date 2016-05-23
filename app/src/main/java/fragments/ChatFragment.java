@@ -29,13 +29,26 @@ public class ChatFragment extends Fragment {
     }
 
 
+    /**
+     * Actions to perform at the creation of the fragment
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MessagesManager manager = MessagesManager.getSingleton(this);
+        MessagesManager manager = MessagesManager.getSingleton();
+        manager.setChatFragment(this);
         messages = manager.getMessages();
     }
 
+
+    /**
+     * Prepare the layout and set the listListener
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -83,6 +96,9 @@ public class ChatFragment extends Fragment {
 
     }
 
+    /**
+     * Notify the list listener that a new message is arrived
+     */
     public void update(){
         if (getActivity()!=null) {
             getActivity().runOnUiThread(new Runnable() {

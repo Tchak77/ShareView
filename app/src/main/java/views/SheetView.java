@@ -17,23 +17,35 @@ import shapes.ShapesManager;
 
 public class SheetView extends View {
 
-    private ShapesManager shapesManager = ShapesManager.getSingleton(this);
+    private ShapesManager shapesManager = ShapesManager.getSingleton();
 
     private float upperLeftX = -1;
     private float upperLeftY = -1;
     private boolean lastShapePolyLine = false;
+
+
     public SheetView(Context context) {
         super(context);
+        shapesManager.setView(this);
 
     }
     public SheetView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        shapesManager.setView(this);
     }
     public SheetView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        shapesManager.setView(this);
     }
 
 
+    /**
+     * Decides which action to perform depending of the finger's motion on screen
+     * Two finger: Move the board
+     * One finger: Create a new Shape or add points in a Polyline
+     * @param event Motion captured
+     * @return true
+     */
     public boolean onTouchEvent(final MotionEvent event){
 
         int action = event.getAction();
@@ -108,6 +120,11 @@ public class SheetView extends View {
 
     }
 
+
+    /**
+     * Create a new Text on the board asking for the user in a Dialog the String to print
+     * @param event
+     */
     private void setTextOnBoard(MotionEvent event) {
         final int x = (int)event.getX();
         final int y =(int)event.getY();
@@ -133,6 +150,11 @@ public class SheetView extends View {
         builder.show();
     }
 
+
+    /**
+     * Draw all the shapes on the view
+     * @param canvas
+     */
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
 
@@ -141,6 +163,10 @@ public class SheetView extends View {
         canvas.restore();
     }
 
+
+    /**
+     * Refresh the view
+     */
     public void invalidateView(){
         if (getContext() != null) {
             ((Activity) getContext()).runOnUiThread(new Runnable() {

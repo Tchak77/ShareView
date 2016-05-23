@@ -14,6 +14,14 @@ public class Texte implements Shape{
     private int color;
     private int size;
 
+    /**
+     * Creates a new Text
+     * @param x value of the left coordinates of the text
+     * @param y value of the top coordinates of the text
+     * @param text String to print
+     * @param color Color of the text
+     * @param size Size of the text
+     */
     public Texte(int x, int y, String text, int color, int size) {
         this.x = x;
         this.y = y;
@@ -22,6 +30,10 @@ public class Texte implements Shape{
         this.size = size;
     }
 
+    /**
+     * Print the text
+     * @param canvas
+     */
     @Override
     public void draw(Canvas canvas) {
         Paint p = new Paint();
@@ -30,6 +42,12 @@ public class Texte implements Shape{
         canvas.drawText(text, x, y, p);
     }
 
+    /**
+     * Serialize the text into a String in a JSON format
+     * @param dx translation done in X axis
+     * @param dy translation done in Y axis
+     * @return
+     */
     @Override
     public String toJSON(int dx, int dy) {
         String str = "";
@@ -41,16 +59,31 @@ public class Texte implements Shape{
         return str;
     }
 
+
+    /**
+     * Move the shape on the view
+     * @param dx Value of the translation on X axis
+     * @param dy Value of the translation on Y axis
+     */
     @Override
     public void translate(int dx, int dy) {
         x += dx;
         y += dy;
     }
 
+
+    /**
+     * Return the value on left side
+     * @return X
+     */
     public int getX(){
         return x;
     }
 
+    /**
+     * Return the value on the top side
+     * @return Y
+     */
     public int getY(){
         return y;
     }

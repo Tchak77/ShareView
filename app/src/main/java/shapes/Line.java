@@ -15,19 +15,31 @@ public class Line implements Shape {
     private int color;
     private int stroke;
 
-
-    public Line(int xstart, int ystart, int xend, int yend, int color, int stoke) {
-
+    /**
+     * Construction that represents a Line
+     *
+     * @param xstart Coordinates of the first point on X axis
+     * @param ystart Coordinates of the first point on Y axis
+     * @param xend Coordinates of the second point on X axis
+     * @param yend Coordinates of the second point on Y axis
+     * @param color Color the line
+     * @param stroke Stroke of the line
+     */
+    public Line(int xstart, int ystart, int xend, int yend, int color, int stroke) {
 
         Xstart = xstart;
         Ystart = ystart;
         Xend = xend;
         Yend = yend;
-        this.stroke = stoke;
+        this.stroke = stroke;
 
         this.color = color;
     }
 
+    /**
+     * Draw a line on the view thanks to the canvas
+     * @param canvas
+     */
     @Override
     public void draw(Canvas canvas) {
         Paint p = new Paint();
@@ -36,6 +48,13 @@ public class Line implements Shape {
         canvas.drawLine(Xstart, Ystart, Xend, Yend, p);
     }
 
+    /**
+     * Serialize the line into a string into a JSON format
+     *
+     * @param dx Translation done on x axis
+     * @param dy Translation done on y axis
+     * @return
+     */
     @Override
     public String toJSON(int dx, int dy) {
         String str = "";
@@ -48,6 +67,11 @@ public class Line implements Shape {
         return str;
     }
 
+    /**
+     * Move the shape on the view
+     * @param dx Value of the translation on X axis
+     * @param dy Value of the translation on Y axis
+     */
     @Override
     public void translate(int dx, int dy) {
         Xstart += dx;
@@ -56,10 +80,17 @@ public class Line implements Shape {
         Yend += dy;
     }
 
-
+    /**
+     * Return the value on left side
+     * @return X
+     */
     public int getX(){
         return Xstart;
     }
+    /**
+     * Return the value on top side
+     * @return Y
+     */
     public int getY(){
         return Ystart;
     }

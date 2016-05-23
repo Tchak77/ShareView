@@ -15,6 +15,13 @@ public class Polyline implements Shape {
     private List<Point> points;
     private int stroke;
 
+    /**
+     * Creates a new Polyline with a Point
+     * @param xstart Coordinates on the X axis
+     * @param ystart Coordiantes on the Y axis
+     * @param color Color of the polyline
+     * @param stroke Stroke of the polyline
+     */
     public Polyline(float xstart, float ystart, int color, int stroke) {
         points = new ArrayList<>();
         points.add(new Point(xstart, ystart));
@@ -22,10 +29,21 @@ public class Polyline implements Shape {
         this.stroke = stroke;
     }
 
+
+    /**
+     * Add a point into the Polyline
+     * @param x Coodinates of the new Point on X axis
+     * @param y Coodinates of the new Point on Y axis
+     */
     public void addPoint(int x, int y){
         points.add(new Point(x,y));
     }
 
+
+    /**
+     * Draw the Polyline on the view thanks to the canvas
+     * @param canvas
+     */
     @Override
     public void draw(Canvas canvas) {
         Paint p = new Paint();
@@ -36,15 +54,28 @@ public class Polyline implements Shape {
         }
     }
 
-
+    /**
+     * Set the color of the polyline
+     * @param color
+     */
     public void setColor(int color){
         this.color = color;
     }
 
+    /**
+     * Return the last Point of the Polyline
+     * @return the last Point of the Polyline
+     */
     public Point getPoint(){
         return points.get(points.size()-1);
     }
-
+    /**
+     * Serialize the ellipse into a string in JSON format
+     *
+     * @param dx Translation done on x axis
+     * @param dy Translation done on y axis
+     * @return
+     */
     @Override
     public String toJSON(int dx, int dy) {
         float[] colors = new float[3];
@@ -61,6 +92,11 @@ public class Polyline implements Shape {
         return str.toString();
     }
 
+    /**
+     * Move the shape on the view
+     * @param dx Value of the translation on X axis
+     * @param dy Value of the translation on Y axis
+     */
     @Override
     public void translate(int dx, int dy) {
         for(Point point: points){
@@ -68,10 +104,18 @@ public class Polyline implements Shape {
         }
     }
 
-
+    /**
+     * Return the X axis of the first Point
+     * @return X
+     */
     public int getX(){
         return (int)points.get(0).getX();
     }
+
+    /**
+     * Return the Y axis of the first Point
+     * @return Y
+     */
     public int getY(){
         return (int)points.get(0).getY();
     }

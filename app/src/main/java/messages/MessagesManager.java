@@ -31,23 +31,17 @@ public class MessagesManager {
         }
         return manager;
     }
+    
 
-    public static MessagesManager getSingleton(String pseudo) {
-        getSingleton();
-        manager.pseudo = pseudo;
-        return manager;
+    public void setPseudo(String pseudo){
+        this.pseudo = pseudo;
     }
 
-    public static MessagesManager getSingleton(ChatFragment chatFragment) {
-        getSingleton();
-        manager.chatFragment = chatFragment;
-        return manager;
+    public void setChatFragment(ChatFragment chatFragment){
+        this.chatFragment = chatFragment;
     }
-
-    public static MessagesManager getSingleton(UsersFragment usersFragment) {
-        getSingleton();
-        manager.usersFragment = usersFragment;
-        return manager;
+    public void setUsersFragment(UsersFragment usersFragment){
+        this.usersFragment = usersFragment;
     }
 
     public void sendMessage(String messageStr) {

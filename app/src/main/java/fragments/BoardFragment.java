@@ -35,6 +35,11 @@ public class BoardFragment extends Fragment {
     public BoardFragment() {
     }
 
+
+    /**
+     * Actions to perform at the creation of the fragment
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +49,14 @@ public class BoardFragment extends Fragment {
 
     }
 
+
+    /**
+     * Prepare the view and set the Shapes' toolbar listeners
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -162,11 +175,23 @@ public class BoardFragment extends Fragment {
         return rootView;
     }
 
+
+    /**
+     * Add a menu to the fragment
+     * @param menu
+     * @param inflater
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_board, menu);
     }
 
+
+    /**
+     * Perform actins depending of the option selected
+     * @param item The option selected
+     * @return true
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -205,6 +230,15 @@ public class BoardFragment extends Fragment {
         return true;
     }
 
+
+    /**
+     * Reset the toolbar
+     * @param ellipse
+     * @param rectangle
+     * @param line
+     * @param polyline
+     * @param texte
+     */
     private void clearToolbar(ImageButton ellipse, ImageButton rectangle, ImageButton line, ImageButton polyline, ImageButton texte){
         ellipse.setBackground(getActivity().getDrawable(R.drawable.ellipse));
         rectangle.setBackground(getActivity().getDrawable(R.drawable.rectangle));

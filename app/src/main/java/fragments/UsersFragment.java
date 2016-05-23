@@ -27,13 +27,26 @@ public class UsersFragment extends Fragment {
     }
 
 
+    /**
+     * Actions to performe at the creation of the fragment
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MessagesManager manager = MessagesManager.getSingleton(this);
+        MessagesManager manager = MessagesManager.getSingleton();
+        manager.setUsersFragment(this);
         users = manager.getUsers();
     }
 
+
+    /**
+     * Prepare the layout and the list listener
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -69,6 +82,9 @@ public class UsersFragment extends Fragment {
 
     }
 
+    /**
+     * Notify the list adapter that a new person arrived/leaved
+     */
     public void update() {
         if(getActivity()!=null){
             getActivity().runOnUiThread(new Runnable() {

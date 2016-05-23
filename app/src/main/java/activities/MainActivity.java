@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity implements OptionsFragment.O
                                                                 ChatFragment.OnFragmentInteractionListener{
 
     private String title;
-    private String pseudo;
 
     private FragmentManager fragmentManager;
     private BoardFragment boardFragment;
@@ -28,6 +27,12 @@ public class MainActivity extends AppCompatActivity implements OptionsFragment.O
     private ChatFragment chatFragment;
     private UsersFragment usersFragment;
 
+
+    /**
+     * Actions to perform at the creation of the Activity
+     * Initialize the differents fragments and manage the FragmentManager
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,17 +51,19 @@ public class MainActivity extends AppCompatActivity implements OptionsFragment.O
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         title = getIntent().getStringExtra("title");
-        pseudo = getIntent().getStringExtra("pseudo");
-        toolbar.setTitle(title);
-        setSupportActionBar(toolbar);
 
+        if(toolbar != null) {
+            toolbar.setTitle(title);
+            setSupportActionBar(toolbar);
+        }
 
         configureFragmentsToolbar();
     }
 
 
-
-
+    /**
+     * Configure listeners of the fragments list
+     */
     private void configureFragmentsToolbar() {
         TextView toolbarOption = (TextView)findViewById(R.id.toolbarOption);
         if(toolbarOption != null)

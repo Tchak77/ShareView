@@ -29,6 +29,11 @@ public class HomeActivity extends AppCompatActivity {
     private String pseudo = "";
     private String address_ip;
     private String port;
+
+    /**
+     * Ask for the pseudo at the creation of the activity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +59,8 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(!input.getText().toString().trim().isEmpty()){
                     pseudo = input.getText().toString().trim();
-                    ShapesManager.getSingleton(pseudo);
-                    MessagesManager.getSingleton(pseudo);
+                    ShapesManager.getSingleton().setPseudo(pseudo);
+                    MessagesManager.getSingleton().setPseudo(pseudo);
                     createMenuView();
                     dialog.dismiss();
                 }
@@ -63,6 +68,11 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+
+    /**
+     * Show the main menu
+     * Perform the creation of a new board and the joining of an existing board
+     */
     private void createMenuView() {
         setContentView(R.layout.home_activity);
 

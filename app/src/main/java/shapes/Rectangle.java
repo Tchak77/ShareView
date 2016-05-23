@@ -17,6 +17,16 @@ public class Rectangle implements Shape {
     private int borderColor;
 
 
+    /**
+     * Create a new Rectangle
+     * @param x position of the left side on X axis
+     * @param y position on the top side Y axis
+     * @param width width of the rectangle
+     * @param height height of the rectangle
+     * @param color Color of the heart of the shape
+     * @param borderSize Size of the border
+     * @param borderColor Color of the border
+     */
     public Rectangle(int x, int y, int width, int height, int color, int borderSize, int borderColor) {
 
         if(width < 0){
@@ -40,6 +50,10 @@ public class Rectangle implements Shape {
 
 
 
+    /**
+     * Draw the rectangle on the view thanks to the canvas
+     * @param canvas
+     */
     public void draw(Canvas canvas){
         Paint p = new Paint();
         p.setColor(color);
@@ -50,6 +64,14 @@ public class Rectangle implements Shape {
         canvas.drawRect(X+(borderSize/2), Y + (borderSize/2), X + width - (borderSize/2), Y+height - (borderSize/2), p);
     }
 
+
+    /**
+     * Serialize the rectangle into a string in JSON format
+     *
+     * @param dx Translation done on x axis
+     * @param dy Translation done on y axis
+     * @return
+     */
     @Override
     public String toJSON(int dx, int dy) {
         String str = "";
@@ -67,16 +89,30 @@ public class Rectangle implements Shape {
         return str;
     }
 
+
+    /**
+     * Move the shape on the view
+     * @param dx Value of the translation on X axis
+     * @param dy Value of the translation on Y axis
+     */
     @Override
     public void translate(int dx, int dy) {
         X += dx;
         Y += dy;
     }
 
+    /**
+     * Return the value on left side
+     * @return X
+     */
    public int getX(){
         return X;
     }
 
+    /**
+     * Return the value on the top side
+     * @return Y
+     */
     public int getY(){
         return Y;
     }
