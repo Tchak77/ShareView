@@ -254,7 +254,7 @@ public class ShapesManager {
 
                     }
 
-                    shapes.add(new Ellipse((int) centerX, (int) centerY, (int) width, (int) height, color));
+                    shapes.add(new Ellipse((int) centerX + indiceTranslationX, (int) centerY + indiceTranslationY, (int) width, (int) height, color));
                     break;
 
 
@@ -274,7 +274,7 @@ public class ShapesManager {
                         color = Color.argb(Integer.parseInt(colors[0]), Integer.parseInt(colors[1]), Integer.parseInt(colors[2]), Integer.parseInt(colors[3]));
                     }
 
-                    shapes.add(new Rectangle((int) left, (int) top, (int) width, (int) height, color));
+                    shapes.add(new Rectangle((int) left + indiceTranslationX, (int) top + indiceTranslationY, (int) width, (int) height, color));
                     break;
 
 
@@ -299,10 +299,10 @@ public class ShapesManager {
                         }
 
                         if (poly == null) {
-                            poly = new Polyline(pointX, pointY, color, (int)strokeSize);
+                            poly = new Polyline(pointX + indiceTranslationX, pointY + indiceTranslationY, color, (int)strokeSize);
                             shapes.add(poly);
                         } else {
-                            poly.addPoint((int) pointX, (int) pointY);
+                            poly.addPoint((int) pointX + indiceTranslationX, (int) pointY + indiceTranslationY);
                         }
 
                     }
@@ -324,7 +324,7 @@ public class ShapesManager {
 
                         strokeSize = options.optDouble("strokeWidth");
                     }
-                    shapes.add(new Texte((int) x, (int) y, text, color, (int)strokeSize));
+                    shapes.add(new Texte((int) x + indiceTranslationX, (int) y + indiceTranslationY, text, color, (int)strokeSize));
                     break;
 
             }
