@@ -49,7 +49,7 @@ public class Rectangle implements Shape {
         colors[0] = Color.red(color);
         colors[1] = Color.green(color);
         colors[2] = Color.blue(color);
-        str += "{\\\"draw\\\": { \\\"shape\\\": \\\"rectangle\\\", \\\"left\\\":"+(X-dx)+", \\\"top\\\":"+(Y-dy)+",\\\"right\\\":"+(X+width)+",\\\"bottom\\\":"+(Y+height)+", \\\"options\\\": {\\\"fillColor\\\": ["+ Color.alpha(color)+", "+colors[0]+", "+colors[1]+", "+colors[2]+"] }} }";
+        str += "{\\\"draw\\\": { \\\"shape\\\": \\\"rectangle\\\", \\\"left\\\":"+(X-dx)+", \\\"top\\\":"+(Y-dy)+",\\\"right\\\":"+((X+width)-dx)+",\\\"bottom\\\":"+((Y+height)-dy)+", \\\"options\\\": {\\\"fillColor\\\": ["+ Color.alpha(color)+", "+colors[0]+", "+colors[1]+", "+colors[2]+"] }} }";
         return str;
     }
 

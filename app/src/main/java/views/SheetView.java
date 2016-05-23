@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -39,6 +38,7 @@ public class SheetView extends View {
 
         int action = event.getAction();
         int nbFinger = event.getPointerCount();
+
 
         if(nbFinger == 2){
             if(action == MotionEvent.ACTION_POINTER_UP){

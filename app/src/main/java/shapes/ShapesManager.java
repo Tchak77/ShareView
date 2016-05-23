@@ -264,8 +264,16 @@ public class ShapesManager {
                     double top = jsonObject.optDouble("top");
                     double bottom = jsonObject.optDouble("bottom");
 
-                    height = bottom - top;
-                    width = right - left;
+                    if(bottom > top) {
+                        height = bottom - top;
+                    } else {
+                        height = top - bottom;
+                    }
+                    if(right > left) {
+                        width = right - left;
+                    } else {
+                        width = left - right;
+                    }
 
                     options = jsonObject.optJSONObject("options");
                     if(options != null){
