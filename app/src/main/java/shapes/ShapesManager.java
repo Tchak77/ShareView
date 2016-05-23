@@ -20,10 +20,11 @@ public class ShapesManager {
     private static ShapesManager manager;
     private List<Shape> shapes;
     private int current;
-    private boolean finishPolyLine = false;
     private int color = Color.BLACK;
     private int texteSize = 15;
     private int strokeSize = 15;
+    private int borderSize = 0;
+    private int borderColor = Color.MAGENTA;
     private String pseudo;
     private String addressIp;
     private String port;
@@ -103,12 +104,12 @@ public class ShapesManager {
         SendQueueMessage sendQueueMessage = new SendQueueMessage();
         switch (current) {
             case Shape.ELLIPSE:
-                Ellipse ellipse = new Ellipse(x, y, width, height, color);
+                Ellipse ellipse = new Ellipse(x, y, width, height, color, borderSize, borderColor);
                 sendQueueMessage.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,addressIp, port, title, pseudo, ellipse.toJSON(indiceTranslationX, indiceTranslationY));
                 return ellipse;
 
             case Shape.RECTANGLE:
-                Rectangle rectangle = new Rectangle(x, y, width, height, color);
+                Rectangle rectangle = new Rectangle(x, y, width, height, color, borderSize, borderColor);
                 sendQueueMessage.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,addressIp, port, title, pseudo, rectangle.toJSON(indiceTranslationX, indiceTranslationY));
                 return rectangle;
 
@@ -230,6 +231,8 @@ public class ShapesManager {
             int color = Color.BLACK;
             JSONObject options;
             double strokeSize = 15;
+            double bSize = 0;
+            int bColor = Color.BLACK;
 
             String forme = jsonObject.getString("shape");
             switch (forme) {
@@ -252,9 +255,17 @@ public class ShapesManager {
                         String[] colors = colorstr.substring(1, colorstr.length()-1).split(",");
                         color = Color.argb(Integer.parseInt(colors[0]), Integer.parseInt(colors[1]), Integer.parseInt(colors[2]), Integer.parseInt(colors[3]));
 
+                        String borderColorstr = options.optString("strokeColor");
+                        String[] borderColors = borderColorstr.substring(1, borderColorstr.length()-1).split(",");
+                        bColor = Color.argb(Integer.parseInt(borderColors[0]), Integer.parseInt(borderColors[1]), Integer.parseInt(borderColors[2]), Integer.parseInt(borderColors[3]));
+
+
+                        bSize = options.optDouble("strokeWidth");
+
+
                     }
 
-                    shapes.add(new Ellipse((int) centerX + indiceTranslationX, (int) centerY + indiceTranslationY, (int) width, (int) height, color));
+                    shapes.add(new Ellipse((int) centerX + indiceTranslationX, (int) centerY + indiceTranslationY, (int) width, (int) height, color, (int)bSize, bColor));
                     break;
 
 
@@ -280,9 +291,16 @@ public class ShapesManager {
                         String colorstr = options.optString("fillColor");
                         String[] colors = colorstr.substring(1, colorstr.length()-1).split(",");
                         color = Color.argb(Integer.parseInt(colors[0]), Integer.parseInt(colors[1]), Integer.parseInt(colors[2]), Integer.parseInt(colors[3]));
+
+                        String borderColorstr = options.optString("strokeColor");
+                        String[] borderColors = borderColorstr.substring(1, borderColorstr.length()-1).split(",");
+                        bColor = Color.argb(Integer.parseInt(borderColors[0]), Integer.parseInt(borderColors[1]), Integer.parseInt(borderColors[2]), Integer.parseInt(borderColors[3]));
+
+
+                        bSize = options.optDouble("strokeWidth");
                     }
 
-                    shapes.add(new Rectangle((int) left + indiceTranslationX, (int) top + indiceTranslationY, (int) width, (int) height, color));
+                    shapes.add(new Rectangle((int) left + indiceTranslationX, (int) top + indiceTranslationY, (int) width, (int) height, color, (int)bSize, bColor));
                     break;
 
 
@@ -343,6 +361,20 @@ public class ShapesManager {
             je.printStackTrace();
         }
 
+    }
+
+    public void setBorderSize(int size){
+        this.borderSize = size;
+    }
+    public void setBorderColor(int color){
+        this.borderColor = color;
+    }
+
+    public int getBorderSize(){
+        return borderSize;
+    }
+    public int getBorderColor(){
+        return borderColor;
     }
 
     public int getSize(){ return shapes.size(); }

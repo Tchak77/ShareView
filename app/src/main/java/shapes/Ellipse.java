@@ -13,8 +13,10 @@ public class Ellipse implements Shape {
     private int height;
     private int width;
     private int color;
+    private int borderSize;
+    private int borderColor;
 
-    public Ellipse(int X, int Y, int width, int height, int color){
+    public Ellipse(int X, int Y, int width, int height, int color, int borderSize, int borderColor){
 
         if(width < 0){
             this.X = X+width;
@@ -31,7 +33,8 @@ public class Ellipse implements Shape {
             this.Y = Y;
             this.height = height;
         }
-
+        this.borderSize = borderSize;
+        this.borderColor = borderColor;
         this.color = color;
     }
 
@@ -40,7 +43,12 @@ public class Ellipse implements Shape {
     public void draw(Canvas canvas){
         Paint p = new Paint();
         p.setColor(color);
-        canvas.drawOval(new RectF(X , Y  , X + width, Y + height), p);
+        Paint border = new Paint();
+        border.setColor(borderColor);
+        canvas.drawOval(new RectF(X, Y, X+width, Y + height),border);
+        canvas.drawOval(new RectF(X + (borderSize/2) , Y + (borderSize/2)  , X + width - (borderSize/2), Y + height - (borderSize/2)), p);
+
+
     }
 
     @Override
@@ -49,8 +57,13 @@ public class Ellipse implements Shape {
         colors[0] = Color.red(color);
         colors[1] = Color.green(color);
         colors[2] = Color.blue(color);
+
+        float[] borderColors = new float[3];
+        borderColors[0] = Color.red(borderColor);
+        borderColors[1] = Color.green(borderColor);
+        borderColors[2] = Color.blue(borderColor);
         String str = "";
-        str += "{\\\"draw\\\": { \\\"shape\\\": \\\"ellipse\\\", \\\"center\\\":["+(X-dx)+","+(Y-dy)+"], \\\"radius\\\": ["+width+","+height+"], \\\"options\\\": {\\\"fillColor\\\": ["+Color.alpha(color)+", "+(int)colors[0]+", "+(int)colors[1]+", "+(int)colors[2]+"] } } }";
+        str += "{\\\"draw\\\": { \\\"shape\\\": \\\"ellipse\\\", \\\"center\\\":["+(X-dx)+","+(Y-dy)+"], \\\"radius\\\": ["+width+","+height+"], \\\"options\\\": {\\\"fillColor\\\": ["+Color.alpha(color)+", "+(int)colors[0]+", "+(int)colors[1]+", "+(int)colors[2]+"], \\\"strokeWidth\\\":"+borderSize+", \\\"strokeColor\\\": ["+Color.alpha(borderColor)+", "+(int)borderColors[0]+", "+(int)borderColors[1]+", "+(int)borderColors[2]+"] } } }";
 
         return str;
     }

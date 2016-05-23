@@ -22,4 +22,7 @@
     <string name="app_name" translatable="false"></string>
     <string name="enablePrevious">Activer les états précédents: </string>
     <string name="back">Retour</string>
+    <string name="borderColor">Couleur des bordures</string>
+    <string name="borderSize">Taille des bordures</string>
+
 </resources>

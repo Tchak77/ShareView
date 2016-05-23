@@ -135,6 +135,7 @@ public class SheetView extends View {
 
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
+
         canvas.save();
         shapesManager.drawShapes(canvas);
         canvas.restore();
@@ -150,38 +151,4 @@ public class SheetView extends View {
             });
         }
     }
-
 }
-
-/**
- *
- * Trouver ou mettre
- *
- View topborder = findViewById(R.id.topborder);
- View bottomborder = findViewById(R.id.bottomborder);
- View leftborder = findViewById(R.id.leftborder);
- View rightborder = findViewById(R.id.rightborder);
-
- if(shapesManager.hasShapeOnTop()) {
- topborder.getLayoutParams().height = 100;
- Log.v("toto", "toto");
- } else {
- topborder.getLayoutParams().height = 0;
- Log.v("toto", "noob");
- }
- if(shapesManager.hasShapeOnBottom(((FrameLayout)getParent()).getLayoutParams().height)) {
- bottomborder.getLayoutParams().height = 100;
- } else {
- bottomborder.getLayoutParams().height = 0;
- }
- if(shapesManager.hasShapeOnLeft()) {
- leftborder.getLayoutParams().width = 100;
- } else {
- leftborder.getLayoutParams().height = 0;
- }
- if(shapesManager.hasShapeOnRight(((FrameLayout)getParent()).getLayoutParams().width)) {
- rightborder.getLayoutParams().height = 10;
- } else {
- rightborder.getLayoutParams().height = 0;
- }
- */

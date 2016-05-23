@@ -107,4 +107,64 @@
         android:id="@+id/previousBar"
         android:indeterminate="false" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/borderSize" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/borderBar"
+        android:indeterminate="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/borderColor" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        >
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:id="@+id/borderBlue"
+            android:background="@drawable/bleu"
+            android:clickable="true"/>
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:id="@+id/borderRed"
+            android:background="@drawable/rouge"
+            android:clickable="true"/>
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:id="@+id/borderGreen"
+            android:background="@drawable/vert"
+            android:clickable="true"/>
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:id="@+id/borderBlack"
+            android:background="@drawable/noir"
+            android:clickable="true"/>
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:id="@+id/borderWhite"
+            android:background="@drawable/blanc"
+            android:clickable="true"/>
+
+    </LinearLayout>
+
+
 </LinearLayout>

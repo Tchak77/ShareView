@@ -6,7 +6,6 @@
     <string name="export">Export</string>
     <string name="share">Share</string>
     <string name="previous">See previous states</string>
-    <string name="title_activity_home_activity" translatable="false">home_activity</string>
 
     <string name="title">Title</string>
 
@@ -28,6 +27,8 @@
     <string name="strokeSize">Stroke Size: </string>
     <string name="color">Color:</string>
     <string name="enablePrevious">Enable previous view: </string>
+    <string name="borderColor">Border color: </string>
+    <string name="borderSize">Border size: </string>
 
 
     <!--Option toolbar-->

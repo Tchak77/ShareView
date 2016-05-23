@@ -159,6 +159,70 @@ public class OptionsFragment extends Fragment {
             }
         });
 
+
+
+        SeekBar borderSizeBar = (SeekBar) rootView.findViewById(R.id.borderBar);
+
+        borderSizeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                shapesManager.setBorderSize(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                //NOTHING TO DO
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                //NOTHING TO DO
+            }
+        });
+
+        final ImageButton borderBlue = (ImageButton) rootView.findViewById(R.id.borderBlue);
+        final ImageButton borderRed = (ImageButton) rootView.findViewById(R.id.borderRed);
+        final ImageButton borderGreen = (ImageButton) rootView.findViewById(R.id.borderGreen);
+        final ImageButton borderBlack = (ImageButton) rootView.findViewById(R.id.borderBlack);
+        final ImageButton borderWhite = (ImageButton) rootView.findViewById(R.id.borderWhite);
+
+        borderBlue.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                shapesManager.setBorderColor(Color.BLUE);
+                return true;
+            }
+        });
+        borderRed.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                shapesManager.setBorderColor(Color.RED);
+                return true;
+            }
+        });
+        borderGreen.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                shapesManager.setBorderColor(Color.GREEN);
+                return true;
+            }
+        });
+        borderBlack.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                shapesManager.setBorderColor(Color.BLACK);
+                return true;
+            }
+        });
+        borderWhite.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                shapesManager.setBorderColor(Color.WHITE);
+                return true;
+            }
+        });
+
+
         return rootView;
     }
 
