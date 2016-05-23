@@ -94,9 +94,7 @@ public class SheetView extends View {
                 if(upperLeftX != -1) {
                     if (shapesManager.isTexte()) {
                         setTextOnBoard(event);
-
                     } else {
-                        Log.v("toto","created");
                         shapesManager.createShape((int) upperLeftX, (int) upperLeftY, (int) (event.getX() - upperLeftX), (int) (event.getY() - upperLeftY));
                     }
                     upperLeftY = -1;
