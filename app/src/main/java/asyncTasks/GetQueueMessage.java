@@ -1,8 +1,6 @@
 package asyncTasks;
 
-import android.app.Activity;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,12 +12,16 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import activities.MainActivity;
 import messages.MessagesManager;
 import shapes.ShapesManager;
 
 public class GetQueueMessage extends AsyncTask<String, Void, Void> {
-    
+
+    /**
+     * This method get all the messages send to the server for one Queue and give them to the managers
+     * @param params ip address, port
+     * @return
+     */
     @Override
     protected Void doInBackground(String... params) {
         HttpURLConnection urlConnection = null;

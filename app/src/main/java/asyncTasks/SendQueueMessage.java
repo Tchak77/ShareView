@@ -11,6 +11,11 @@ import java.net.URL;
 
 public class SendQueueMessage extends AsyncTask<String, Void, Void> {
 
+    /**
+     * This method send a message with the pseudo to the server for a queue
+     * @param params ip address, port, queue, pseudo, message
+     * @return
+     */
     @Override
     protected Void doInBackground(String... params) {
         try{

@@ -15,6 +15,11 @@ import java.util.regex.Pattern;
 
 public class GetQueues extends AsyncTask<String, Void, List<String>> {
 
+    /**
+     * This method get the queues existing on the server and return them
+     * @param params Url of the server
+     * @return List<String> containing all the queues
+     */
     @Override
     protected List<String> doInBackground(String... params) {
         HttpURLConnection urlConnection = null;
