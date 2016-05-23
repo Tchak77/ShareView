@@ -66,7 +66,7 @@ public class SheetView extends View {
 
                     upperLeftX = event.getX();
                     upperLeftY = event.getY();
-                    shapesManager.addShape(shapesManager.createShape((int)upperLeftX, (int)upperLeftY, 0, 0));
+                    shapesManager.createShape((int)upperLeftX, (int)upperLeftY, 0, 0);
                     return true;
                 } else {
                     upperLeftX = event.getX();
@@ -97,7 +97,7 @@ public class SheetView extends View {
 
                     } else {
                         Log.v("toto","created");
-                        shapesManager.addShape(shapesManager.createShape((int) upperLeftX, (int) upperLeftY, (int) (event.getX() - upperLeftX), (int) (event.getY() - upperLeftY)));
+                        shapesManager.createShape((int) upperLeftX, (int) upperLeftY, (int) (event.getX() - upperLeftX), (int) (event.getY() - upperLeftY));
                     }
                     upperLeftY = -1;
                     upperLeftX = -1;
@@ -122,7 +122,7 @@ public class SheetView extends View {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String text = input.getText().toString();
-                shapesManager.addShape(shapesManager.createTexte(x, y, text));
+                shapesManager.createTexte(x, y, text);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
